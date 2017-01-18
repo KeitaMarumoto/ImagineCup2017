@@ -1,2 +1,2 @@
-# ImagineCup2017
-test
+﻿# ImagineCup2017
+テスト
