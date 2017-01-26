@@ -1,2 +1,2 @@
-﻿# ImagineCup2017
+﻿# Team Name:*Licht*
 テスト
