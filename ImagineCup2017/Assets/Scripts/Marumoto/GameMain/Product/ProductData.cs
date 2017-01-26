@@ -24,6 +24,10 @@ public class ProductData {
 	/// 1つ当たりの売却にかかる時間。
 	/// </summary>
 	public float SecondsToSell { get; private set; }
+	/// <summary>
+	/// 商品の数
+	/// </summary>
+	public int NumberOfProducts { get; set; }
 
 	/// <summary>
 	/// 商品データのコンストラクタ
@@ -44,5 +48,6 @@ public class ProductData {
 		Cost = cost_;
 		Rank = rank_;
 		SecondsToSell = secondsToSell_;
+		NumberOfProducts = 0;
 	}
 }
