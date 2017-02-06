@@ -34,16 +34,22 @@ public class CameraController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.DownArrow)) MoveVerticalCamera(-1);
         if (Input.GetKeyDown(KeyCode.RightArrow)) MoveHorizontalCamera(1);
         if (Input.GetKeyDown(KeyCode.LeftArrow)) MoveHorizontalCamera(-1);
+
     }
 
     void ZoomCamera()
     {
         float zoom = Input.GetAxis("Mouse ScrollWheel");
-
         if (zoom < 0 && cam.orthographicSize > minZoomSize)
+        {
+            Debug.Log("min");
             cam.orthographicSize -= 1.0f;
-        else if (zoom > 0 && cam.orthographicSize < maxZoomSize)
+        }
+        if (zoom > 0 && cam.orthographicSize < maxZoomSize)
+        {
+            Debug.Log("add");
             cam.orthographicSize += 1.0f;
+        }
     }
 
     public void MoveVerticalCamera(float move)
