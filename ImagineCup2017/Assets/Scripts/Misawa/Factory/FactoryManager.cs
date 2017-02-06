@@ -18,16 +18,16 @@ public class FactoryManager : MonoBehaviour {
     /// 工場C |0|0|4|0|0|
     int[,] factoriesCount;
 
-    Dictionary<string, int> factorieType = new Dictionary<string, int>();
+    //Dictionary<string, int> factorieType = new Dictionary<string, int>();
 
     // Use this for initialization
     void Start () {
 
         //工場名で配列番号にアクセスできるようにするためにする
-        for(int i = 0;i< factoryData.Length; i++)
+        /*for(int i = 0;i< factoryData.Length; i++)
         {
             factorieType.Add(factoryData[i].factoryName, i);
-        }
+        }*/
 
         //工場数の初期化
         factoriesCount = new int[factoryData.Length, maxFactoryRank];
@@ -46,18 +46,20 @@ public class FactoryManager : MonoBehaviour {
     /// <param name="factoryName">工場名</param>
     /// <param name="rank">工場ランク</param>
     /// <returns>その工場がたっている数</returns>
-    public int GetFactoriesCount(string factoryName,int rank){
-        return factoriesCount[factorieType[factoryName], rank-1];
+    public int GetFactoriesCount(int factoryID,int rank){
+        return factoriesCount[factoryID, rank-1];
     }
 
     /// <summary>
     /// 工場建設
     /// </summary>
     /// <param name="factoryName">建てたい工場名</param>
-    public void Construction(string factoryName)
+    public int Construction(int factoryID)
     {
-        factoriesCount[factorieType[factoryName], 0]++;
-        Debug.Log(factoryName + "を建設");
+        if (factoryID < 0 && factoryID >= factoriesCount.GetLength(0)) return 0;
+        factoriesCount[factoryID, 0]++;
+        Debug.Log(factoryData[factoryID].factoryName + "を建設");
+        return factoryData[factoryID].factoryStatus[0].rankUpcost;
     }
 
     /// <summary>
@@ -65,17 +67,20 @@ public class FactoryManager : MonoBehaviour {
     /// </summary>
     /// <param name="factoryName">ランクを上げたい工場の工場名</param>
     /// <param name="rank">ランクを上げたい工場の現在の工場ランク</param>
-    public void RankUp(string factoryName, int rank)
+    public int RankUp(int factoryID, int rank)
     {
-        if (factoriesCount[factorieType[factoryName], rank - 1] > 0)
+        if (factoryID < 0 && factoryID >= factoriesCount.GetLength(0)) return 0;
+        if (rank < factoriesCount.GetLength(1) && rank > 0 && factoriesCount[factoryID, rank - 1] >= 0)
         {
-            factoriesCount[factorieType[factoryName], rank - 1]--;
-            factoriesCount[factorieType[factoryName], rank]++;
-            Debug.Log(factoryName + "ランクアップ");
+            factoriesCount[factoryID, rank-1]--;
+            factoriesCount[factoryID, rank]++;
+            Debug.Log(factoryData[factoryID].factoryName + "の"+rank+"をランクアップ");
+            return factoryData[factoryID].factoryStatus[rank].rankUpcost;
         }
         else
         {
-            Debug.LogWarning(factoryName + "は存在しません");
+            Debug.LogWarning(factoryData[factoryID].factoryName + "は存在しません");
+            return 0;
         }
     }
 
@@ -95,4 +100,5 @@ public class FactoryManager : MonoBehaviour {
         }
         return productCount;
     }
+
 }
