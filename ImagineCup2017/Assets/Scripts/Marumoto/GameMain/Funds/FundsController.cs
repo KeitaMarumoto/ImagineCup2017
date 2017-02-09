@@ -10,7 +10,8 @@ public class FundsController : MonoBehaviour {
 
 	void Start()
 	{
-		//FundsValueChange(0.0f);
+		DividingValue();
+		TextUpdate();
 	}
 
 	/// <summary>
