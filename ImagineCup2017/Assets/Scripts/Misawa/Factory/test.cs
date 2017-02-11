@@ -63,7 +63,7 @@ public class test : MonoBehaviour {
         }
     }
 
-    public void Build(int factoryID)
+    public void OnClickBuildButton(int factoryID)
     {
         //buildFactoryID = factoryID;
         state = State.BUILD;
@@ -88,7 +88,7 @@ public class test : MonoBehaviour {
         }
     }
 
-    public void RankUp()
+    public void OnClickRankUpButton()
     {
         state = State.RANKUP;
         StartCoroutine(RankUpFactory());
@@ -110,6 +110,11 @@ public class test : MonoBehaviour {
             }
             yield return null;
         }
+    }
+
+    public void OnClickCancelButton()
+    {
+        state = State.MAKE;
     }
 
     private GameObject RayCast()
