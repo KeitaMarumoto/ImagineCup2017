@@ -153,6 +153,8 @@ public class MapGenerator : MonoBehaviour {
         GameObject hitObj = RayCast();
 
         if (hitObj == null) return false;
+        Debug.Log(hitObj.tag);
+        if (hitObj.tag == "IndustryTab" || hitObj.tag == "HoldTab") return false;
 
         choiceCube.transform.position = hitObj.transform.position;
 
@@ -165,7 +167,7 @@ public class MapGenerator : MonoBehaviour {
         GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
         quad.transform.position = new Vector3(x - 0.25f, 1.0f, y - 0.25f);
         quad.transform.rotation = Quaternion.Euler(45, 45, 0);
-        quad.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+        quad.transform.localScale = new Vector3(1.2f, 1.2f, 0);
         quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[x, y] - 1];
         quad.transform.SetParent(buildingParent.transform);
 
