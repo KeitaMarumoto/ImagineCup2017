@@ -14,15 +14,18 @@ public class test : MonoBehaviour {
     [SerializeField]
     MapGenerator mapGenerator;
 
+    [SerializeField]
+    FundsController fundsController;
+
     int[] productCount = new int[4];
 
     State state;
-    int buildFactoryID;
+    //int buildFactoryID;
     
     // Use this for initialization
     void Start () {
         state = State.MAKE;
-        buildFactoryID = 0;
+        //buildFactoryID = 0;
         foreach (var product in productCount) product.Equals(0);
 	}
 	
@@ -30,25 +33,7 @@ public class test : MonoBehaviour {
 	void Update () {
         if (Input.GetMouseButtonDown(0))
         {
-            if (state == State.BUILD)
-            {
-                if (mapGenerator.CreateBuilding(buildFactoryID))
-                {
-                    int num = factoryManager.Construction(mapGenerator.GetThisFactoryID());
-                    Debug.Log(num);
-                }
-                state = State.MAKE;
-            }
-            else if (state == State.RANKUP)
-            {
-                if (mapGenerator.RankUpBuilding())
-                {
-                    int num = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
-                    Debug.Log(num);
-                }
-                state = State.MAKE;
-            }
-            else
+            if(state == State.MAKE)
             {
                 //工場で商品を生産
                 int[] pro = factoryManager.Make();
@@ -78,15 +63,58 @@ public class test : MonoBehaviour {
         }
     }
 
-    public void Build(int factoryID)
+    public void OnClickBuildButton(int factoryID)
     {
-        buildFactoryID = factoryID;
+        //buildFactoryID = factoryID;
         state = State.BUILD;
+        StartCoroutine(BuildNewFactory(factoryID));
     }
 
-    public void RankUp()
+    IEnumerator BuildNewFactory(int buildFactoryID)
+    {
+        while(state == State.BUILD)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (mapGenerator.CreateBuilding(buildFactoryID))
+                {
+                    int num = factoryManager.Construction(mapGenerator.GetThisFactoryID());
+                    fundsController.FundsValueChange(-num);
+                    Debug.Log(num);
+                    state = State.MAKE;
+                }
+            }
+            yield return null;
+        }
+    }
+
+    public void OnClickRankUpButton()
     {
         state = State.RANKUP;
+        StartCoroutine(RankUpFactory());
+    }
+
+    IEnumerator RankUpFactory()
+    {
+        while (state == State.RANKUP)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (mapGenerator.RankUpBuilding())
+                {
+                    int num = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+                    Debug.Log(num);
+                    state = State.MAKE;
+                }
+                Debug.Log(state);
+            }
+            yield return null;
+        }
+    }
+
+    public void OnClickCancelButton()
+    {
+        state = State.MAKE;
     }
 
     private GameObject RayCast()
