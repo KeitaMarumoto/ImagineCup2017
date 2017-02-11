@@ -12,10 +12,7 @@ public class PollutionStatus : MonoBehaviour {
 	private void Start()
 	{
 		Pollutions = new Dictionary<string, float>();
-		Pollutions.Add("CO2", 33.0f);
-		Pollutions.Add("PM2.5", 33.0f);
-		Pollutions.Add("CO", 33.0f);
-		SumPollutionsData();
+		SetupData();
 		StartCoroutine(DecreasePollution());
 	}
 
@@ -23,11 +20,16 @@ public class PollutionStatus : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.R))
 		{
-			Pollutions["CO2"] = 33.0f;
-			Pollutions["PM2.5"] = 33.0f;
-			Pollutions["CO"] = 33.0f;
-			SumPollutionsData();
+			SetupData();
 		}
+	}
+
+	void SetupData()
+	{
+		Pollutions["CO2"] = 33.0f;
+		Pollutions["PM2.5"] = 33.0f;
+		Pollutions["CO"] = 33.0f;
+		SumPollutionsData();
 	}
 
 	IEnumerator DecreasePollution()
