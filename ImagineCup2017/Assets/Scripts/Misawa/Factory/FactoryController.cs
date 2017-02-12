@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
-public class test : MonoBehaviour {
+public class FactoryController : MonoBehaviour {
     enum State
     {
-        MAKE,BUILD,RANKUP
+        MAKE, BUILD, RANKUP
     }
 
     [SerializeField]
@@ -17,62 +18,44 @@ public class test : MonoBehaviour {
     [SerializeField]
     FundsController fundsController;
 
-    int[] productCount = new int[4];
+    [SerializeField]
+    ProductRegister productRegister;
 
     State state;
-    //int buildFactoryID;
-    
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         state = State.MAKE;
-        //buildFactoryID = 0;
-        foreach (var product in productCount) product.Equals(0);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            if(state == State.MAKE)
+            if (state == State.MAKE)
             {
                 //工場で商品を生産
-                int[] pro = factoryManager.Make();
+                Dictionary<string, int> productCount = factoryManager.Make();
 
-                for (int i = 0; i < 4; i++)
+                foreach (KeyValuePair<string, int> product in productCount)
                 {
-                    productCount[i] += pro[i];
+                    productRegister.NumberOfProductsValueChange(product.Key, product.Value);
                 }
-
-                string log = "";
-                log += "ランク1：" + factoryManager.GetFactoriesCount(0, 1).ToString() + "\n";
-                log += "ランク2：" + factoryManager.GetFactoriesCount(0, 2).ToString() + "\n";
-                log += "ランク3：" + factoryManager.GetFactoriesCount(0, 3).ToString() + "\n";
-
-                log += "ランク1：" + factoryManager.GetFactoriesCount(1, 1).ToString() + "\n";
-                log += "ランク2：" + factoryManager.GetFactoriesCount(1, 2).ToString() + "\n";
-                log += "ランク3：" + factoryManager.GetFactoriesCount(1, 3).ToString() + "\n";
-
-                Debug.Log(log);
-                log = "";
-                for (int i = 0; i < 4; i++)
-                {
-                    log += i + "の個数：" + productCount[i].ToString("00000000") + "\n";
-                }
-                Debug.Log(log);
             }
         }
     }
 
     public void OnClickBuildButton(int factoryID)
     {
-        //buildFactoryID = factoryID;
         state = State.BUILD;
         StartCoroutine(BuildNewFactory(factoryID));
     }
 
     IEnumerator BuildNewFactory(int buildFactoryID)
     {
-        while(state == State.BUILD)
+        while (state == State.BUILD)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -103,6 +86,7 @@ public class test : MonoBehaviour {
                 if (mapGenerator.RankUpBuilding())
                 {
                     int num = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+                    fundsController.FundsValueChange(-num);
                     Debug.Log(num);
                     state = State.MAKE;
                 }
