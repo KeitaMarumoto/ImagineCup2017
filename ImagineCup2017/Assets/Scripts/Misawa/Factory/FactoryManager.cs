@@ -88,14 +88,18 @@ public class FactoryManager : MonoBehaviour {
     /// 生産
     /// </summary>
     /// <returns>工場の種類ごとの生産した個数</returns>
-    public int[] Make()
+    public Dictionary<string, int> Make()
     {
-        int[] productCount = new int[4];//ここの4は商品の種類数
+        Dictionary<string, int> productCount = new Dictionary<string, int>();// = new int[4];//ここの4は商品の種類数
+
         for (int i = 0; i < factoryData.Length; i++)
         {
             for (int j = 0; j < maxFactoryRank; j++)
             {
-                productCount[factoryData[i].factoryStatus[j].productType] += factoryData[i].factoryStatus[j].productCount * factoriesCount[i, j];
+                if (productCount.ContainsKey(factoryData[i].factoryStatus[j].productName))
+                    productCount[factoryData[i].factoryStatus[j].productName] += factoryData[i].factoryStatus[j].productCount * factoriesCount[i, j];
+                else
+                    productCount.Add(factoryData[i].factoryStatus[j].productName, factoryData[i].factoryStatus[j].productCount * factoriesCount[i, j]);
             }
         }
         return productCount;

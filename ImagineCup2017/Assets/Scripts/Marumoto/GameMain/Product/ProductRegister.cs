@@ -43,8 +43,30 @@ public class ProductRegister : MonoBehaviour {
 	/// <returns>商品データを返却。</returns>
 	public Dictionary<string, ProductData> getProductDatas() { return products; }
 
-	//デバッグ用:商品データを確実に登録できているかの確認用。
-	void OutProductsData()
+    /// <summary>
+    /// 商品の数を増減させる
+    /// </summary>
+    /// <param name="key">追加したい商品名</param>
+    /// <param name="num">増減する量</param>
+    /// 三澤が追加
+    public void NumberOfProductsValueChange(string key,int num)
+    {
+        products[key].NumberOfProducts += num;
+    }
+
+    public void tesLog()
+    {
+        string message = "";
+        foreach (KeyValuePair<string, ProductData> prod_ in products)
+        {
+            message += "Name : " + prod_.Value.Name + " | "
+                    + "Number : " + prod_.Value.NumberOfProducts.ToString() + "\n";
+        }
+        Debug.Log(message);
+    }
+
+    //デバッグ用:商品データを確実に登録できているかの確認用。
+    void OutProductsData()
 	{
 		foreach (KeyValuePair<string, ProductData> prod_ in products)
 		{

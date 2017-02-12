@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class test : MonoBehaviour {
     enum State
@@ -17,7 +18,10 @@ public class test : MonoBehaviour {
     [SerializeField]
     FundsController fundsController;
 
-    int[] productCount = new int[4];
+    [SerializeField]
+    ProductRegister productRegister;
+
+    //int[] productCount = new int[4];
 
     State state;
     //int buildFactoryID;
@@ -26,7 +30,7 @@ public class test : MonoBehaviour {
     void Start () {
         state = State.MAKE;
         //buildFactoryID = 0;
-        foreach (var product in productCount) product.Equals(0);
+        //foreach (var product in productCount) product.Equals(0);
 	}
 	
 	// Update is called once per frame
@@ -36,12 +40,16 @@ public class test : MonoBehaviour {
             if(state == State.MAKE)
             {
                 //工場で商品を生産
-                int[] pro = factoryManager.Make();
+                Dictionary<string, int> pro = factoryManager.Make();
 
-                for (int i = 0; i < 4; i++)
+                foreach (KeyValuePair<string, int> tes in pro)
+                {
+                    productRegister.NumberOfProductsValueChange(tes.Key,tes.Value);
+                }
+                /*for (int i = 0; i < 4; i++)
                 {
                     productCount[i] += pro[i];
-                }
+                }*/
 
                 string log = "";
                 log += "ランク1：" + factoryManager.GetFactoriesCount(0, 1).ToString() + "\n";
@@ -53,12 +61,7 @@ public class test : MonoBehaviour {
                 log += "ランク3：" + factoryManager.GetFactoriesCount(1, 3).ToString() + "\n";
 
                 Debug.Log(log);
-                log = "";
-                for (int i = 0; i < 4; i++)
-                {
-                    log += i + "の個数：" + productCount[i].ToString("00000000") + "\n";
-                }
-                Debug.Log(log);
+                productRegister.tesLog();
             }
         }
     }
@@ -103,6 +106,7 @@ public class test : MonoBehaviour {
                 if (mapGenerator.RankUpBuilding())
                 {
                     int num = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+                    fundsController.FundsValueChange(-num);
                     Debug.Log(num);
                     state = State.MAKE;
                 }

@@ -1053,15 +1053,15 @@ MonoBehaviour:
     factoryRank: 0
     constructionCost: 1
     factoryStatus:
-    - productType: 0
+    - productName: Toy
       rankUpcost: 30
       productCount: 20
       pollutionDegree: 0
-    - productType: 0
+    - productName: Game
       rankUpcost: 30
       productCount: 40
       pollutionDegree: 0
-    - productType: 0
+    - productName: Tool
       rankUpcost: 30
       productCount: 60
       pollutionDegree: 0
@@ -1069,15 +1069,15 @@ MonoBehaviour:
     factoryRank: 0
     constructionCost: 1
     factoryStatus:
-    - productType: 1
+    - productName: Toy
       rankUpcost: 30
       productCount: 10
       pollutionDegree: 0
-    - productType: 2
+    - productName: Toy
       rankUpcost: 30
       productCount: 40
       pollutionDegree: 0
-    - productType: 0
+    - productName: Toy
       rankUpcost: 30
       productCount: 20
       pollutionDegree: 0
@@ -2199,6 +2199,7 @@ MonoBehaviour:
   factoryManager: {fileID: 831724337}
   mapGenerator: {fileID: 1550235753}
   fundsController: {fileID: 774295099}
+  productRegister: {fileID: 987002560}
 --- !u!1 &1784721244
 GameObject:
   m_ObjectHideFlags: 0
