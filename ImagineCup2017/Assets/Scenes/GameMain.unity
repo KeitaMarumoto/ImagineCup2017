@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 987002559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e15fac925e00f4a98026561c412a97, type: 3}
+  m_Script: {fileID: 11500000, guid: 6976028b3575afc47a8117ddf7ed1e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fundsController: {fileID: 774295099}
@@ -2150,6 +2150,7 @@ GameObject:
   - 4: {fileID: 1550235754}
   - 114: {fileID: 1550235753}
   - 114: {fileID: 1550235755}
+  - 114: {fileID: 1550235756}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -2205,9 +2206,24 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1550235752}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46297390fa70f894ab3e0741000d6b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factoryManager: {fileID: 831724337}
+  mapGenerator: {fileID: 1550235753}
+  fundsController: {fileID: 774295099}
+  productRegister: {fileID: 987002560}
+--- !u!114 &1550235756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1550235752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d3a92c04cdce44180b0434d49e8a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   factoryManager: {fileID: 831724337}
