@@ -58,7 +58,6 @@ public class FactoryManager : MonoBehaviour {
     {
         if (factoryID < 0 && factoryID >= factoriesCount.GetLength(0)) return 0;
         factoriesCount[factoryID, 0]++;
-        Debug.Log(factoryData[factoryID].factoryName + "を建設");
         return factoryData[factoryID].factoryStatus[0].rankUpcost;
     }
 
@@ -67,10 +66,9 @@ public class FactoryManager : MonoBehaviour {
     /// </summary>
     /// <param name="factoryID"></param>
     /// <returns></returns>
-    public float GetPollutionDegree(int factoryID,int rank)
+    public FactoryStatusData GetFactoryStatus(int factoryID,int rank)
     {
-        Debug.Log(factoryData[factoryID].factoryStatus[rank].pollutionDegree);
-        return factoryData[factoryID].factoryStatus[rank].pollutionDegree;
+        return factoryData[factoryID].factoryStatus[rank];
     }
 
     /// <summary>

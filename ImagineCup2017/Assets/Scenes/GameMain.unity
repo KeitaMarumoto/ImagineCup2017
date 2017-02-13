@@ -141,23 +141,29 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0.75
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: -1
+      outSlope: -1
       tangentMode: 10
     - time: 0.5
-      value: 0.75
-      inSlope: -2.2298708
-      outSlope: -2.2298708
+      value: 0.5
+      inSlope: -0.32341158
+      outSlope: -0.32341158
+      tangentMode: 0
+    - time: 0.75
+      value: 0.45000002
+      inSlope: -0.3781519
+      outSlope: -0.3781519
       tangentMode: 0
     - time: 1
       value: 0
-      inSlope: -1.5
-      outSlope: -1.5
+      inSlope: -1.8000001
+      outSlope: -1.8000001
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  pollutionStatus: {fileID: 1792761963}
   testPollution: 0
 --- !u!1 &100239311
 GameObject:
@@ -1193,14 +1199,17 @@ MonoBehaviour:
     - productName: Toy
       rankUpcost: 30
       productCount: 20
+      pollutionType: CO2
       pollutionDegree: 0.14
     - productName: Game
       rankUpcost: 30
       productCount: 40
+      pollutionType: CO2
       pollutionDegree: 0.173
     - productName: Tool
       rankUpcost: 30
       productCount: 60
+      pollutionType: CO2
       pollutionDegree: 0.259
   - factoryName: "\u5DE5\u5834B"
     factoryRank: 0
@@ -1209,14 +1218,17 @@ MonoBehaviour:
     - productName: Game
       rankUpcost: 30
       productCount: 10
+      pollutionType: CO2
       pollutionDegree: 0.1
     - productName: Game
       rankUpcost: 30
       productCount: 40
+      pollutionType: CO2
       pollutionDegree: 0.2
     - productName: Game
       rankUpcost: 30
       productCount: 20
+      pollutionType: CO2
       pollutionDegree: 0.3
 --- !u!4 &831724338
 Transform:

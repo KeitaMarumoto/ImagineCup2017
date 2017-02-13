@@ -67,7 +67,8 @@ public class FactoryController : MonoBehaviour {
 
                     int cost = factoryManager.Construction(mapGenerator.GetThisFactoryID());
                     fundsController.FundsValueChange(-cost);
-                    pollutionStatus.SetPollution("CO2", factoryManager.GetPollutionDegree(mapGenerator.GetThisFactoryID(), 0));
+                    FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), 0);
+                    pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
                     state = State.MAKE;
                 }
             }
@@ -91,7 +92,8 @@ public class FactoryController : MonoBehaviour {
                 {
                     int cost = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
                     fundsController.FundsValueChange(-cost);
-                    pollutionStatus.SetPollution("CO2", factoryManager.GetPollutionDegree(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank()));
+                    FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+                    pollutionStatus.SetPollution(data.pollutionType,data.pollutionDegree);
                     state = State.MAKE;
                 }
             }
