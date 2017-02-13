@@ -58,8 +58,17 @@ public class FactoryManager : MonoBehaviour {
     {
         if (factoryID < 0 && factoryID >= factoriesCount.GetLength(0)) return 0;
         factoriesCount[factoryID, 0]++;
-        Debug.Log(factoryData[factoryID].factoryName + "を建設");
         return factoryData[factoryID].factoryStatus[0].rankUpcost;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="factoryID"></param>
+    /// <returns></returns>
+    public FactoryStatusData GetFactoryStatus(int factoryID,int rank)
+    {
+        return factoryData[factoryID].factoryStatus[rank];
     }
 
     /// <summary>

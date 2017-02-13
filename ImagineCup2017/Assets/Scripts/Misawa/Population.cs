@@ -10,6 +10,9 @@ public class Population : MonoBehaviour {
     [SerializeField]
     AnimationCurve rate;
 
+    [SerializeField]
+    PollutionStatus pollutionStatus;
+
     public int population { set; get; }
 
     [SerializeField,Range(0,1),Tooltip("デバッグ用")]
@@ -25,7 +28,7 @@ public class Population : MonoBehaviour {
     {
         while (true)
         {
-            population += (int)((rate.Evaluate(testPollution) -0.5)*100);
+            population += (int)((rate.Evaluate(pollutionStatus.SumPollution) -0.5)*100);
             populationText.text = population.ToString();
             yield return new WaitForSeconds(0.1f);
         }
