@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &186875186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -401,8 +401,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: -37.5}
+  m_SizeDelta: {x: -200, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &186875187
 MonoBehaviour:
@@ -425,18 +425,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 54
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 54
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE5\u5834A"
+  m_Text: "\u5546\u54C1\uFF1AGame\n\n\u751F\u7523\u6570\uFF1A\n\n\u5EFA\u8A2D\u8CBB\uFF1A"
 --- !u!222 &186875188
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1144,7 +1144,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0568070482bc1144cb832b3fc3475df3, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3ecd83d793e7b9247af3f0cb0a3d96c3, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1193,31 +1193,31 @@ MonoBehaviour:
     - productName: Toy
       rankUpcost: 30
       productCount: 20
-      pollutionDegree: 0.262
+      pollutionDegree: 0.14
     - productName: Game
       rankUpcost: 30
       productCount: 40
-      pollutionDegree: 0.402
+      pollutionDegree: 0.173
     - productName: Tool
       rankUpcost: 30
       productCount: 60
-      pollutionDegree: 0
+      pollutionDegree: 0.259
   - factoryName: "\u5DE5\u5834B"
     factoryRank: 0
     constructionCost: 1
     factoryStatus:
-    - productName: Toy
+    - productName: Game
       rankUpcost: 30
       productCount: 10
-      pollutionDegree: 0
-    - productName: Toy
+      pollutionDegree: 0.1
+    - productName: Game
       rankUpcost: 30
       productCount: 40
-      pollutionDegree: 0
-    - productName: Toy
+      pollutionDegree: 0.2
+    - productName: Game
       rankUpcost: 30
       productCount: 20
-      pollutionDegree: 0
+      pollutionDegree: 0.3
 --- !u!4 &831724338
 Transform:
   m_ObjectHideFlags: 0
@@ -1827,7 +1827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1091281817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1843,8 +1843,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: -37.5}
+  m_SizeDelta: {x: -200, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091281818
 MonoBehaviour:
@@ -1867,18 +1867,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 54
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 54
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE5\u5834A"
+  m_Text: "\u5546\u54C1\uFF1AToy\n\n\u751F\u7523\u6570\uFF1A\n\n\u5EFA\u8A2D\u8CBB\uFF1A"
 --- !u!222 &1091281819
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1939,7 +1939,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0568070482bc1144cb832b3fc3475df3, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3ecd83d793e7b9247af3f0cb0a3d96c3, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2120,7 +2120,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -110, y: 0}
+  m_AnchoredPosition: {x: -110, y: -30}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201504108
@@ -2890,7 +2890,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2993,7 +2993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1525040361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3009,8 +3009,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: -37.5}
+  m_SizeDelta: {x: -200, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525040362
 MonoBehaviour:
@@ -3033,18 +3033,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 54
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 54
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE5\u5834A"
+  m_Text: "\u5546\u54C1\uFF1AGame\n\n\u751F\u7523\u6570\uFF1A\n\n\u5EFA\u8A2D\u8CBB\uFF1A"
 --- !u!222 &1525040363
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3061,6 +3061,7 @@ GameObject:
   - 4: {fileID: 1550235754}
   - 114: {fileID: 1550235753}
   - 114: {fileID: 1550235756}
+  - 114: {fileID: 1550235755}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -3110,6 +3111,27 @@ Transform:
   - {fileID: 831724338}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1550235755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1550235752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad259e7c0ba6bf241b85d2498b6fc26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMat: {fileID: 2100000, guid: 1db79a5bd18da6445b59fda8ab593794, type: 2}
+  groundTextures:
+  - {fileID: 2800000, guid: abbb84b5e0ec18d44b67e7933b85b200, type: 3}
+  - {fileID: 2800000, guid: 34b145023ad50144e96922c2dde3c704, type: 3}
+  - {fileID: 2800000, guid: 04589d602e9052c4b8672088074eca91, type: 3}
+  waterMat: {fileID: 2100000, guid: e9f98f6afe96aab47948b9964a232caf, type: 2}
+  waterTextures:
+  - {fileID: 2800000, guid: 57b22b3188faa7a4b852390d0969af9b, type: 3}
+  - {fileID: 2800000, guid: 2c048fcde0651b34089fd57edc5fbcc8, type: 3}
+  - {fileID: 2800000, guid: d925cf4683634e64b975e6655314e900, type: 3}
 --- !u!114 &1550235756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3335,6 +3357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gauge_: {fileID: 1961864543}
+  pollutionMap: {fileID: 1550235755}
 --- !u!1 &1856034182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,7 +3390,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -110, y: 0}
+  m_AnchoredPosition: {x: -110, y: -30}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856034184
@@ -3655,7 +3678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1915464874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3671,8 +3694,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: -37.5}
+  m_SizeDelta: {x: -200, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915464875
 MonoBehaviour:
@@ -3695,18 +3718,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 54
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 54
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE5\u5834A"
+  m_Text: "\u5546\u54C1\uFF1AToy\n\n\u751F\u7523\u6570\uFF1A\n\n\u5EFA\u8A2D\u8CBB\uFF1A"
 --- !u!222 &1915464876
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3870,7 +3893,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

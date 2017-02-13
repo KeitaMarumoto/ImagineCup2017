@@ -6,6 +6,9 @@ public class PollutionStatus : MonoBehaviour {
 	[SerializeField]
 	RectTransform gauge_;
 
+    [SerializeField]
+    PollutionMap pollutionMap;
+
 	Vector3 basePosition_;
 
 	public float SumPollution { get; private set; }
@@ -73,7 +76,8 @@ public class PollutionStatus : MonoBehaviour {
 			result_ += value_.Value;
 		}
 		SumPollution = ClumpingPollution(result_);
-		UpdateGauge();
+        pollutionMap.ChangeTexture(SumPollution);
+        UpdateGauge();
 	}
 
 	float ClumpingPollution(float data_)
