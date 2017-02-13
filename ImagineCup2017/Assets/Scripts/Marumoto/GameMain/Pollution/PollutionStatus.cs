@@ -4,14 +4,17 @@ using System.Collections.Generic;
 
 public class PollutionStatus : MonoBehaviour {
 	[SerializeField]
-	Transform gauge_;
+	RectTransform gauge_;
+
+	Vector3 basePosition_;
 
 	public float SumPollution { get; private set; }
-	public Dictionary<string, float> Pollutions { get; set; }
+	public Dictionary<string, float> Pollutions { get; private set; }
 
 	private void Start()
 	{
 		Pollutions = new Dictionary<string, float>();
+		basePosition_ = gauge_.localPosition;
 		SetupData();
 		StartCoroutine(DecreasePollution());
 	}
@@ -24,11 +27,17 @@ public class PollutionStatus : MonoBehaviour {
 		}
 	}
 
+	public void SetPollution(string key_, float value_)
+	{
+		Pollutions[key_] += value_;
+		Pollutions[key_] = ClumpingPollution(Pollutions[key_]);
+	}
+
 	void SetupData()
 	{
-		Pollutions["CO2"] = 33.0f;
-		Pollutions["PM2.5"] = 33.0f;
-		Pollutions["CO"] = 33.0f;
+		Pollutions["CO2"] = 0.0f;
+		Pollutions["PM2.5"] = 0.0f;
+		Pollutions["CO"] = 0.0f;
 		SumPollutionsData();
 	}
 
@@ -37,7 +46,7 @@ public class PollutionStatus : MonoBehaviour {
 		while (true)
 		{
 			yield return new WaitForSeconds(2.0f);
-
+			Debug.Log(SumPollution);
 			List<string> keys_ = new List<string>();
 			foreach(var key_ in Pollutions)
 			{
@@ -46,7 +55,7 @@ public class PollutionStatus : MonoBehaviour {
 
 			foreach (var key_ in keys_)
 			{
-				float updateValue_ = Pollutions[key_] - 3.0f;
+				float updateValue_ = Pollutions[key_] - 0.03f;
 				updateValue_ = ClumpingPollution(updateValue_);
 				Pollutions[key_] = updateValue_;
 			}
@@ -69,9 +78,9 @@ public class PollutionStatus : MonoBehaviour {
 
 	float ClumpingPollution(float data_)
 	{
-		if (data_ > 100.0f)
+		if (data_ > 1.0f)
 		{
-			data_ = 100.0f;
+			data_ = 1.0f;
 			return data_;
 		}
 		if (data_ < 0.0f)
@@ -84,8 +93,9 @@ public class PollutionStatus : MonoBehaviour {
 
 	void UpdateGauge()
 	{
-		gauge_.localScale = new Vector3(gauge_.localScale.x,
-									    SumPollution / 100.0f,
-									    gauge_.localScale.z);
+		Debug.Log("rect.height : " + gauge_.rect.height);
+		gauge_.localPosition = new Vector3(basePosition_.x,
+										   basePosition_.y + gauge_.rect.height * SumPollution,
+										   basePosition_.z);
 	}
 }

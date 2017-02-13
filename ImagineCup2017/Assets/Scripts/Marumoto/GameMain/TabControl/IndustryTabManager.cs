@@ -81,7 +81,8 @@ public class IndustryTabManager : MonoBehaviour {
 	/// <returns></returns>
 	int SearchTabIndex(RaycastHit _hit3D)
 	{
-		if (_hit3D.transform.tag == "IndustryTab") return 0;
+		if (_hit3D.transform.name == "PurchaseTab") return 0;
+		if (_hit3D.transform.name == "RemodelingTab") return 1;
 		else return 3;
 	}
 
