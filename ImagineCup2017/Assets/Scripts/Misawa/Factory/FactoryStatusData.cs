@@ -10,6 +10,6 @@ public class FactoryStatusData
     public int rankUpcost;
     [Range(1, 100), Tooltip("生産数")]
     public int productCount;
-    [Range(1, 100), Tooltip("汚染度")]
+    [Range(0,1), Tooltip("汚染度")]
     public float pollutionDegree;
 }

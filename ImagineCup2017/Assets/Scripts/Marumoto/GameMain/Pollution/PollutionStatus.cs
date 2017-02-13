@@ -16,7 +16,7 @@ public class PollutionStatus : MonoBehaviour {
 		Pollutions = new Dictionary<string, float>();
 		basePosition_ = gauge_.localPosition;
 		SetupData();
-		StartCoroutine(DecreasePollution());
+		//StartCoroutine(DecreasePollution());
 	}
 
 	private void Update()
@@ -31,9 +31,10 @@ public class PollutionStatus : MonoBehaviour {
 	{
 		Pollutions[key_] += value_;
 		Pollutions[key_] = ClumpingPollution(Pollutions[key_]);
-	}
+        SumPollutionsData();
+    }
 
-	void SetupData()
+    void SetupData()
 	{
 		Pollutions["CO2"] = 0.0f;
 		Pollutions["PM2.5"] = 0.0f;
@@ -55,7 +56,7 @@ public class PollutionStatus : MonoBehaviour {
 
 			foreach (var key_ in keys_)
 			{
-				float updateValue_ = Pollutions[key_] - 0.03f;
+				float updateValue_ = Pollutions[key_] + 0.03f;
 				updateValue_ = ClumpingPollution(updateValue_);
 				Pollutions[key_] = updateValue_;
 			}
@@ -71,7 +72,6 @@ public class PollutionStatus : MonoBehaviour {
 		{
 			result_ += value_.Value;
 		}
-
 		SumPollution = ClumpingPollution(result_);
 		UpdateGauge();
 	}

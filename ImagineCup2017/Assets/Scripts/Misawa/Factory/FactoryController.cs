@@ -21,6 +21,9 @@ public class FactoryController : MonoBehaviour {
     [SerializeField]
     ProductRegister productRegister;
 
+    [SerializeField]
+    PollutionStatus pollutionStatus;
+
     State state;
 
     // Use this for initialization
@@ -61,9 +64,10 @@ public class FactoryController : MonoBehaviour {
             {
                 if (mapGenerator.CreateBuilding(buildFactoryID))
                 {
-                    int num = factoryManager.Construction(mapGenerator.GetThisFactoryID());
-                    fundsController.FundsValueChange(-num);
-                    Debug.Log(num);
+
+                    int cost = factoryManager.Construction(mapGenerator.GetThisFactoryID());
+                    fundsController.FundsValueChange(-cost);
+                    pollutionStatus.SetPollution("CO2", factoryManager.GetPollutionDegree(mapGenerator.GetThisFactoryID(), 0));
                     state = State.MAKE;
                 }
             }
@@ -85,12 +89,11 @@ public class FactoryController : MonoBehaviour {
             {
                 if (mapGenerator.RankUpBuilding())
                 {
-                    int num = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
-                    fundsController.FundsValueChange(-num);
-                    Debug.Log(num);
+                    int cost = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+                    fundsController.FundsValueChange(-cost);
+                    pollutionStatus.SetPollution("CO2", factoryManager.GetPollutionDegree(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank()));
                     state = State.MAKE;
                 }
-                Debug.Log(state);
             }
             yield return null;
         }

@@ -63,6 +63,17 @@ public class FactoryManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="factoryID"></param>
+    /// <returns></returns>
+    public float GetPollutionDegree(int factoryID,int rank)
+    {
+        Debug.Log(factoryData[factoryID].factoryStatus[rank].pollutionDegree);
+        return factoryData[factoryID].factoryStatus[rank].pollutionDegree;
+    }
+
+    /// <summary>
     /// 工場のランクアップ
     /// </summary>
     /// <param name="factoryName">ランクを上げたい工場の工場名</param>
