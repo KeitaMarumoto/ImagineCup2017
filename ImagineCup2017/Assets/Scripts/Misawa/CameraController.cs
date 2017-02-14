@@ -42,12 +42,10 @@ public class CameraController : MonoBehaviour {
         float zoom = Input.GetAxis("Mouse ScrollWheel");
         if (zoom < 0 && cam.orthographicSize > minZoomSize)
         {
-            Debug.Log("min");
             cam.orthographicSize -= 1.0f;
         }
         if (zoom > 0 && cam.orthographicSize < maxZoomSize)
         {
-            Debug.Log("add");
             cam.orthographicSize += 1.0f;
         }
     }

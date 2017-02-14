@@ -46,6 +46,7 @@ public class FactoryController : MonoBehaviour {
                 {
                     productRegister.NumberOfProductsValueChange(product.Key, product.Value);
                 }
+                mapGenerator.PlayParticle();
             }
         }
     }
