@@ -6,26 +6,26 @@ public class MapGenerator : MonoBehaviour {
     int[,] groundData = { 
 //     ○ ←カメラはこの位置
 
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
-        {2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0, },
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
-        {2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0, },
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
-        {2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0, },
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
-        {2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0, },
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
-        {2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0, },
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
-        {2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0, },
-        {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1, },
-        {1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2, },
+        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3, },
+        {3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3, },
+        {3,3,3,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,3, },
+        {3,3,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3, },
+        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3, },
+        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3, },
     };
 
     [SerializeField, Tooltip("地面に貼るマテリアル")]
@@ -34,6 +34,8 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField]
     GameObject groundParent;
 
+    [SerializeField]
+    GameObject[] itemParticles;
     /*
     どこにどのビルがあるかの情報
     工場の種類は　”(マップに入ってる値 - 1) / 5”　で求める
@@ -79,6 +81,8 @@ public class MapGenerator : MonoBehaviour {
 
     //建てた建物のオブジェクトを持っておく配列
     GameObject[,] buildingObjects;
+    //建てた建物のオブジェクトを持っておく配列
+    ParticleSystem[,] particleObjects;
 
     [SerializeField, Tooltip("地面に貼るマテリアル")]
     Material[] buildingMaterials;
@@ -114,11 +118,13 @@ public class MapGenerator : MonoBehaviour {
 
         //建てた建物のオブジェクトを持っておく配列を初期化
         buildingObjects = new GameObject[buildingData.GetLength(0), buildingData.GetLength(1)];
+        particleObjects = new ParticleSystem[buildingData.GetLength(0), buildingData.GetLength(1)];
         for (int i = 0; i < buildingData.GetLength(0); i++)
         {
             for (int j = 0; j < buildingData.GetLength(1); j++)
             {
                 buildingObjects[i,j] = null;
+                particleObjects[i, j] = null;
             }
         }
 
@@ -133,10 +139,19 @@ public class MapGenerator : MonoBehaviour {
                     quad.transform.rotation = Quaternion.Euler(45, 45, 0);
                     quad.transform.localScale = new Vector3(1.5f, 1.5f, 0);
                     quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[i, j]-1];
+
+                    //Particleの生成
+                    GameObject particle = Instantiate(itemParticles[0]) as GameObject;
+                    particle.transform.SetParent(quad.transform);
+                    particle.transform.localPosition = Vector3.zero;
+                    particle.transform.rotation = Quaternion.Euler(-45, -45, 0);
+                    ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+
                     quad.transform.SetParent(buildingParent.transform);
 
                     //作ったオブジェクトを配列に登録
                     buildingObjects[i, j] = quad;
+                    particleObjects[i, j] = particleSystem;
                 }
             }
         }
@@ -169,10 +184,19 @@ public class MapGenerator : MonoBehaviour {
         quad.transform.rotation = Quaternion.Euler(45, 45, 0);
         quad.transform.localScale = new Vector3(1.2f, 1.2f, 0);
         quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[x, y] - 1];
+
+        //Particleの生成
+        GameObject particle = Instantiate(itemParticles[0]) as GameObject;
+        particle.transform.SetParent(quad.transform);
+        particle.transform.localPosition = Vector3.zero;
+        particle.transform.localRotation = Quaternion.Euler(-25, -180, 0);
+        ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+
         quad.transform.SetParent(buildingParent.transform);
 
         //作ったオブジェクトを配列に登録
         buildingObjects[x, y] = quad;
+        particleObjects[x, y] = particleSystem;
         return true;
     }
 
@@ -242,5 +266,19 @@ public class MapGenerator : MonoBehaviour {
         if (buildingData[x, y] == 0) return -1;
 
         return (buildingData[x, y] - 1) / maxRank;
+    }
+
+    public void PlayParticle()
+    {
+        for(int i = 0;i<particleObjects.GetLength(0);i++)
+        {
+            for (int j = 0; j < particleObjects.GetLength(1); j++)
+            {
+                if (particleObjects[i, j] != null)
+                {
+                    particleObjects[i, j].Play();
+                }
+            }
+        }
     }
 }

@@ -15,9 +15,6 @@ public class Population : MonoBehaviour {
 
     public int population { set; get; }
 
-    [SerializeField,Range(0,1),Tooltip("デバッグ用")]
-    float testPollution = 0;
-
     // Use this for initialization
     void Start () {
         population = 1000;
