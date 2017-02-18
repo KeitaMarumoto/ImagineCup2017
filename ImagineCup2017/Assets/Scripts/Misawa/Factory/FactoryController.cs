@@ -4,11 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FactoryController : MonoBehaviour {
-    enum State
-    {
-        MAKE, BUILD, RANKUP
-    }
-
+    
     [SerializeField]
     FactoryManager factoryManager;
 
@@ -24,12 +20,9 @@ public class FactoryController : MonoBehaviour {
     [SerializeField]
     PollutionStatus pollutionStatus;
 
-    State state;
-
     // Use this for initialization
     void Start()
     {
-        state = State.MAKE;
     }
 
     // Update is called once per frame
@@ -37,7 +30,11 @@ public class FactoryController : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (state == State.MAKE)
+            if (StateManager.state == StateManager.State.RANKUP)
+            {
+                mapGenerator.ChoicePosition();
+            }
+            else if (StateManager.state == StateManager.State.PRODUCTION)
             {
                 //工場で商品を生産
                 Dictionary<string, int> productCount = factoryManager.Make();
@@ -53,24 +50,23 @@ public class FactoryController : MonoBehaviour {
 
     public void OnClickBuildButton(int factoryID)
     {
-        state = State.BUILD;
+        //StateManager.state = StateManager.State.BUILD;
         StartCoroutine(BuildNewFactory(factoryID));
     }
 
     IEnumerator BuildNewFactory(int buildFactoryID)
     {
-        while (state == State.BUILD)
+        while (StateManager.state == StateManager.State.BUILD)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 if (mapGenerator.CreateBuilding(buildFactoryID))
                 {
-
                     int cost = factoryManager.Construction(mapGenerator.GetThisFactoryID());
                     fundsController.FundsValueChange(-cost);
                     FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), 0);
                     pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
-                    state = State.MAKE;
+                    StateManager.state = StateManager.State.PRODUCTION;
                 }
             }
             yield return null;
@@ -79,13 +75,14 @@ public class FactoryController : MonoBehaviour {
 
     public void OnClickRankUpButton()
     {
-        state = State.RANKUP;
-        StartCoroutine(RankUpFactory());
+        RankUpFactory();
+        //StateManager.state = StateManager.State.RANKUP;
+        //StartCoroutine(RankUpFactory());
     }
-
+    /*
     IEnumerator RankUpFactory()
     {
-        while (state == State.RANKUP)
+        while (StateManager.state == StateManager.State.RANKUP)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -95,16 +92,29 @@ public class FactoryController : MonoBehaviour {
                     fundsController.FundsValueChange(-cost);
                     FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
                     pollutionStatus.SetPollution(data.pollutionType,data.pollutionDegree);
-                    state = State.MAKE;
+                    StateManager.state = StateManager.State.PRODUCTION;
                 }
             }
             yield return null;
         }
     }
+    */
+
+    void RankUpFactory()
+    {
+        if (mapGenerator.RankUpBuilding())
+        {
+            int cost = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+            fundsController.FundsValueChange(-cost);
+            FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
+            pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
+            StateManager.state = StateManager.State.PRODUCTION;
+        }
+    }
 
     public void OnClickCancelButton()
     {
-        state = State.MAKE;
+        StateManager.state = StateManager.State.PRODUCTION;
     }
 
     private GameObject RayCast()
