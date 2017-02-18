@@ -69,9 +69,16 @@ public class IndustryTabManager : MonoBehaviour {
 	{
 		const int _null = 3;
 		int _tabIndex = SearchTabIndex(_hit3D);
-		if (_tabIndex == _null) return;
+        if (_tabIndex == _null)
+        {
+            StateManager.state = StateManager.State.PRODUCTION;
+            return;
+        }
 
-		tabControls[_tabIndex].ActiveEasing();
+        if(_tabIndex == 0) { StateManager.state = StateManager.State.BUILD; }
+        else if (_tabIndex == 1) { StateManager.state = StateManager.State.RANKUP; }
+
+        tabControls[_tabIndex].ActiveEasing();
 	}
 
 	/// <summary>

@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections;
 
 public class MapGenerator : MonoBehaviour {
@@ -93,8 +95,24 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField]
     Material choiceCubeMaterials;
 
+    [SerializeField]
+    Image[] uiImages;
+
     //[SerializeField]
     GameObject choiceCube;
+
+    class MapPosition
+    {
+        public int x;
+        public int y;
+        public MapPosition(int x_,int y_)
+        {
+            x = x_;
+            y = y_;
+        }
+    }
+
+    MapPosition choicePos = new MapPosition(-1,-1);
 
     // Use this for initialization
     void Start()
@@ -165,6 +183,7 @@ public class MapGenerator : MonoBehaviour {
     /// <returns>建てるのに成功したか</returns>
     public bool CreateBuilding(int factoryID)
     {
+        /*
         GameObject hitObj = RayCast();
 
         if (hitObj == null) return false;
@@ -175,15 +194,18 @@ public class MapGenerator : MonoBehaviour {
 
         int x = (int)choiceCube.transform.position.x;
         int y = (int)choiceCube.transform.position.z;
+        */
+        ChoicePosition();
+        Debug.Log(choicePos.x + ":" + choicePos.y);
+        if (choicePos.x < 0 || choicePos.y < 0) return false;
+        if (buildingData[choicePos.x, choicePos.y] != 0) return false;
 
-        if (buildingData[x, y] != 0) return false;
-
-        buildingData[x, y] = (factoryID* maxRank) +1;
+        buildingData[choicePos.x, choicePos.y] = (factoryID* maxRank) +1;
         GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        quad.transform.position = new Vector3(x - 0.25f, 1.0f, y - 0.25f);
+        quad.transform.position = new Vector3(choicePos.x - 0.25f, 1.0f, choicePos.y - 0.25f);
         quad.transform.rotation = Quaternion.Euler(45, 45, 0);
         quad.transform.localScale = new Vector3(1.2f, 1.2f, 0);
-        quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[x, y] - 1];
+        quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
 
         //Particleの生成
         GameObject particle = Instantiate(itemParticles[0]) as GameObject;
@@ -195,8 +217,10 @@ public class MapGenerator : MonoBehaviour {
         quad.transform.SetParent(buildingParent.transform);
 
         //作ったオブジェクトを配列に登録
-        buildingObjects[x, y] = quad;
-        particleObjects[x, y] = particleSystem;
+        buildingObjects[choicePos.x, choicePos.y] = quad;
+        particleObjects[choicePos.x, choicePos.y] = particleSystem;
+
+        ChangeRankUPUIImage();
         return true;
     }
 
@@ -206,7 +230,7 @@ public class MapGenerator : MonoBehaviour {
     /// <returns>ランクを上げることに成功したか</returns>
     public bool RankUpBuilding()
     {
-        GameObject hitObj = RayCast();
+        /*GameObject hitObj = RayCast();
 
         if (hitObj == null) return false;
 
@@ -214,12 +238,18 @@ public class MapGenerator : MonoBehaviour {
 
         int x = (int)choiceCube.transform.position.x;
         int y = (int)choiceCube.transform.position.z;
-        Debug.Log(buildingData[x, y]);
-        if (buildingData[x, y] <= 0) return false;
-        if ((buildingData[x, y] % maxRank) - 1 >= 2 || ((buildingData[x, y] % maxRank) - 1) < 0) return false;
+        */
+        //ChoicePosition();
+        Debug.Log(buildingData[choicePos.x, choicePos.y]);
+        if (choicePos.x < 0 || choicePos.y < 0) return false;
+        if (buildingData[choicePos.x, choicePos.y] <= 0) return false;
+        if ((buildingData[choicePos.x, choicePos.y] % maxRank) - 1 >= 2 || ((buildingData[choicePos.x, choicePos.y] % maxRank) - 1) < 0) return false;
 
-        buildingData[x, y]++;
-        buildingObjects[x, y].GetComponent<Renderer>().material = buildingMaterials[buildingData[x, y] - 1];
+        buildingData[choicePos.x, choicePos.y]++;
+        buildingObjects[choicePos.x, choicePos.y].GetComponent<Renderer>().material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+
+        ChangeRankUPUIImage();
+
         return true;
     }
 
@@ -239,7 +269,7 @@ public class MapGenerator : MonoBehaviour {
 
     public int GetThisFactoryRank()
     {
-        GameObject hitObj = RayCast();
+        /*GameObject hitObj = RayCast();
 
         if (hitObj == null) return -1;
 
@@ -247,13 +277,30 @@ public class MapGenerator : MonoBehaviour {
 
         int x = (int)choiceCube.transform.position.x;
         int y = (int)choiceCube.transform.position.z;
-        Debug.Log("工場ランク = "+((buildingData[x, y] - 1) % maxRank));
-        return ((buildingData[x, y] - 1) % maxRank);
+        */
+        //ChoicePosition();
+        Debug.Log("工場ランク = "+((buildingData[choicePos.x, choicePos.y] - 1) % maxRank));
+        return ((buildingData[choicePos.x, choicePos.y] - 1) % maxRank);
+    }
+
+    public void ChoicePosition()
+    {
+        GameObject hitObj = RayCast();
+
+        if (hitObj == null) return;
+        if (hitObj.tag == "IndustryTab" || hitObj.tag == "HoldTab") return;
+
+        choiceCube.transform.position = hitObj.transform.position;
+
+        choicePos.x = (int)choiceCube.transform.position.x;
+        choicePos.y = (int)choiceCube.transform.position.z;
+
+        ChangeRankUPUIImage();
     }
 
     public int GetThisFactoryID()
     {
-        GameObject hitObj = RayCast();
+        /*GameObject hitObj = RayCast();
 
         if (hitObj == null) return -1;
 
@@ -261,11 +308,30 @@ public class MapGenerator : MonoBehaviour {
 
         int x = (int)choiceCube.transform.position.x;
         int y = (int)choiceCube.transform.position.z;
-        Debug.Log("工場ID = " + (buildingData[x, y] - 1) / maxRank);
+        */
+        //ChoicePosition();
+        if (choicePos.x < 0 || choicePos.y < 0) return -1;
+        Debug.Log("工場ID = " + (buildingData[choicePos.x, choicePos.y] - 1) / maxRank);
 
-        if (buildingData[x, y] == 0) return -1;
+        if (buildingData[choicePos.x, choicePos.y] == 0) return -1;
 
-        return (buildingData[x, y] - 1) / maxRank;
+        return (buildingData[choicePos.x, choicePos.y] - 1) / maxRank;
+    }
+
+    public void ChangeRankUPUIImage()
+    {
+        if (choicePos.x < 0 || choicePos.y < 0) return;
+        Debug.Log("thispos" + (buildingData[choicePos.x, choicePos.y] - 1).ToString());
+        if (buildingData[choicePos.x, choicePos.y] - 1 < 0) return;
+        uiImages[0].material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+        if (buildingData[choicePos.x, choicePos.y] < buildingMaterials.Length)
+        {
+            uiImages[1].material = buildingMaterials[buildingData[choicePos.x, choicePos.y]];
+        }
+        else
+        {
+            uiImages[1].material = null;
+        }
     }
 
     public void PlayParticle()
