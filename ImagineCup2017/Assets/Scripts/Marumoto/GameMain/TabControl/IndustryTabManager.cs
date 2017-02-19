@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class IndustryTabManager : MonoBehaviour {
@@ -50,15 +49,13 @@ public class IndustryTabManager : MonoBehaviour {
 	/// <summary>
 	/// タブを閉じる。
 	/// </summary>
-	/// <param name="_hit3D"></param>
-	void ClosingTab(RaycastHit _hit3D)
+	public void ClosingTab()
 	{
-		const int _null = 3;
-		int _tabIndex = SearchTabIndex(_hit3D);
-		if (_tabIndex == _null) return;
-		if (_hit3D.transform.tag == "HoldTab") return;
-
-		tabControls[_tabIndex].OnClickLightIsOut();
+		//tabControls[_tabIndex].OnClickLightIsOut();
+		foreach(TabControl tab_ in tabControls)
+		{
+			tab_.OnClickClosing();
+		}
 	}
 
 	/// <summary>
@@ -132,13 +129,12 @@ public class IndustryTabManager : MonoBehaviour {
 		if (hit3D.collider)
 		{
 			Debug.Log(hit3D.collider.tag);
-			if (hit3D.transform.tag == "HoldTab")
-			{
-				ClosingTab(hit3D);
-			}
 			if (hit3D.transform.tag == "IndustryTab")
 			{
-				hit3D.transform.SetAsLastSibling();
+				if (!IsAnyDisplaying())
+				{
+					hit3D.transform.SetAsLastSibling();
+				}
 				isPullingTab = true;
 			}
 		}
@@ -160,7 +156,10 @@ public class IndustryTabManager : MonoBehaviour {
 		{
 			if (hit3D.transform.tag == "IndustryTab")
 			{
-				hit3D.transform.SetAsLastSibling();
+				if (!IsAnyDisplaying())
+				{
+					hit3D.transform.SetAsLastSibling();
+				}
 				DisplayingTab(hit3D);
 			}
 		}

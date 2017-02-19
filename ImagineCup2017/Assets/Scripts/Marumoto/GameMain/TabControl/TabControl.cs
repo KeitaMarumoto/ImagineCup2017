@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-
-public class TabControl : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+/// <summary>
+/// 個別のタブの挙動と状態を管理するクラス。
+/// </summary>
+public class TabControl : MonoBehaviour
 {
     //Easingに使う
     [SerializeField]
@@ -56,63 +55,17 @@ public class TabControl : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         {
             ReverceEasing(startTime);
         }
-
-#if UNITY_STANDALONE
-		if (Input.GetMouseButtonDown(0))
-        {
-            OnClickLightIsOut();
-        }
-#elif UNITY_ANDROID
-		if (Input.touchCount > 0)
-		{
-			Touch _touch = Input.GetTouch(0);
-			if (_touch.phase == TouchPhase.Began)
-			{
-				OnClickLightIsOut();
-			}
-		}
-#endif
     }
 
-    //Tabが出ているときに、Tab以外の場所をクリックしたら
     //元の位置に戻す処理
-    public void OnClickLightIsOut()
+    public void OnClickClosing()
     {
-        if (isDisplay && !canEasing[RETURN_NUM] && !RayCast("IndustryTab") && !RayCast("HoldTab"))
-        {
-            canEasing[RETURN_NUM] = true;
-            startTime = Time.timeSinceLevelLoad;
-        }
+		if (isDisplay)
+		{
+			canEasing[RETURN_NUM] = true;
+			startTime = Time.timeSinceLevelLoad;
+		}
     }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-		/*
-        if (isDisplay) return;
-        if (!RayCast("InfoTab")) return;
-
-        startPos = eventData.position.x;
-		*/
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-		/*
-        endPos = eventData.position.x;
-
-        if ((startPos - endPos) < -10)
-        {
-            if (!canEasing[GOING_NUM])
-            {
-                canEasing[GOING_NUM] = true;
-                startTime = Time.timeSinceLevelLoad;
-            }
-        }
-		*/
-    }
-
-    //エラーにならないようにオーバーライドしている
-    public void OnDrag(PointerEventData eventData) { }
 
 	public void ActiveEasing()
 	{
