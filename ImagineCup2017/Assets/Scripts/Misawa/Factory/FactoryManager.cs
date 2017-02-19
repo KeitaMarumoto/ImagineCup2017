@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class FactoryManager : MonoBehaviour {
     [SerializeField, Space(15)]
-    int maxFactoryRank;
+    public int maxFactoryRank;
 
     [SerializeField]
     FactoryData[] factoryData;
