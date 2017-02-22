@@ -86,7 +86,7 @@ public class MapGenerator : MonoBehaviour {
     //建てた建物のオブジェクトを持っておく配列
     ParticleSystem[,] particleObjects;
 
-    [SerializeField, Tooltip("地面に貼るマテリアル")]
+    [SerializeField]
     Material[] buildingMaterials;
 
     [SerializeField]
@@ -96,7 +96,10 @@ public class MapGenerator : MonoBehaviour {
     Material choiceCubeMaterials;
 
     [SerializeField]
-    Image[] uiImages;
+    UIController uiController;
+
+    //[SerializeField]
+    //Image[] uiImages;
 
     //[SerializeField]
     GameObject choiceCube;
@@ -323,14 +326,17 @@ public class MapGenerator : MonoBehaviour {
         if (choicePos.x < 0 || choicePos.y < 0) return;
         Debug.Log("thispos" + (buildingData[choicePos.x, choicePos.y] - 1).ToString());
         if (buildingData[choicePos.x, choicePos.y] - 1 < 0) return;
-        uiImages[0].material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+        //uiImages[0].material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+        uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1], 0);
         if (buildingData[choicePos.x, choicePos.y] < buildingMaterials.Length)
         {
-            uiImages[1].material = buildingMaterials[buildingData[choicePos.x, choicePos.y]];
+            uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y]], 1);
+            //uiImages[1].material = buildingMaterials[buildingData[choicePos.x, choicePos.y]];
         }
         else
         {
-            uiImages[1].material = null;
+            uiController.setRankupUIMaterial(null, 1);
+            //uiImages[1].material = null;
         }
     }
 

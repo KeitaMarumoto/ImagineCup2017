@@ -48,7 +48,7 @@ public class FactoryController : MonoBehaviour {
 
     public void OnClickBuildButton(int factoryID)
     {
-        //StateManager.state = StateManager.State.BUILD;
+        //if (factoryManager.CanBuild(factoryID) == false) return;
         StartCoroutine(BuildNewFactory(factoryID));
     }
 
@@ -65,6 +65,7 @@ public class FactoryController : MonoBehaviour {
                     FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), 0);
                     pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
                     SoundManager.Instance.PlaySE("build");
+                    break;
                     //StateManager.state = StateManager.State.PRODUCTION;
                 }
             }

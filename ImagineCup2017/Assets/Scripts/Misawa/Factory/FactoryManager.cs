@@ -50,6 +50,10 @@ public class FactoryManager : MonoBehaviour {
         return factoriesCount[factoryID, rank-1];
     }
 
+    public bool CanBuild(int factoryID)
+    {
+        return factoryData[factoryID].canBuild;
+    }
     /// <summary>
     /// 工場建設
     /// </summary>
