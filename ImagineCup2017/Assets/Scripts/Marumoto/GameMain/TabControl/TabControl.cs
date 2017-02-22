@@ -64,7 +64,8 @@ public class TabControl : MonoBehaviour
 		{
 			canEasing[RETURN_NUM] = true;
 			startTime = Time.timeSinceLevelLoad;
-		}
+            StateManager.state = StateManager.State.PRODUCTION;
+        }
     }
 
 	public void ActiveEasing()

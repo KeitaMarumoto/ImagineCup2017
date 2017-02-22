@@ -20,11 +20,6 @@ public class FactoryController : MonoBehaviour {
     [SerializeField]
     PollutionStatus pollutionStatus;
 
-    // Use this for initialization
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -36,6 +31,8 @@ public class FactoryController : MonoBehaviour {
             }
             else if (StateManager.state == StateManager.State.PRODUCTION)
             {
+                if (RayCast().tag == "IndustryTab") return;
+
                 //工場で商品を生産
                 Dictionary<string, int> productCount = factoryManager.Make();
 
@@ -43,6 +40,7 @@ public class FactoryController : MonoBehaviour {
                 {
                     productRegister.NumberOfProductsValueChange(product.Key, product.Value);
                 }
+                SoundManager.Instance.PlaySE("makeItem4");
                 mapGenerator.PlayParticle();
             }
         }
@@ -66,7 +64,8 @@ public class FactoryController : MonoBehaviour {
                     fundsController.FundsValueChange(-cost);
                     FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), 0);
                     pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
-                    StateManager.state = StateManager.State.PRODUCTION;
+                    SoundManager.Instance.PlaySE("build");
+                    //StateManager.state = StateManager.State.PRODUCTION;
                 }
             }
             yield return null;
@@ -108,7 +107,8 @@ public class FactoryController : MonoBehaviour {
             fundsController.FundsValueChange(-cost);
             FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
             pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
-            StateManager.state = StateManager.State.PRODUCTION;
+            SoundManager.Instance.PlaySE("build");
+            //StateManager.state = StateManager.State.PRODUCTION;
         }
     }
 

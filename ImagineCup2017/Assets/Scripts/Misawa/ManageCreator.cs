@@ -13,6 +13,7 @@ public class ManageCreator : MonoBehaviour {
 #elif UNITY_ANDROID
         Screen.fullScreen = true;
 #endif
-
+        GameObject SoundManager = Instantiate((GameObject)Resources.Load("SoundManager/SoundManager"));
+        DontDestroyOnLoad(SoundManager);
     }
 }
