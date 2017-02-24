@@ -186,19 +186,7 @@ public class MapGenerator : MonoBehaviour {
     /// <returns>建てるのに成功したか</returns>
     public bool CreateBuilding(int factoryID)
     {
-        /*
-        GameObject hitObj = RayCast();
-
-        if (hitObj == null) return false;
-        Debug.Log(hitObj.tag);
-        if (hitObj.tag == "IndustryTab" || hitObj.tag == "HoldTab") return false;
-
-        choiceCube.transform.position = hitObj.transform.position;
-
-        int x = (int)choiceCube.transform.position.x;
-        int y = (int)choiceCube.transform.position.z;
-        */
-        ChoicePosition();
+        //ChoicePosition();
         Debug.Log(choicePos.x + ":" + choicePos.y);
         if (choicePos.x < 0 || choicePos.y < 0) return false;
         if (buildingData[choicePos.x, choicePos.y] != 0) return false;
@@ -227,21 +215,19 @@ public class MapGenerator : MonoBehaviour {
         return true;
     }
 
+    public bool CheckCanBuildPos()
+    {
+        if (choicePos.x < 0 || choicePos.y < 0) return false;
+        if (buildingData[choicePos.x, choicePos.y] != 0) return false;
+        return true;
+    }
+
     /// <summary>
     /// 工場のランクを上げる
     /// </summary>
     /// <returns>ランクを上げることに成功したか</returns>
     public bool RankUpBuilding()
     {
-        /*GameObject hitObj = RayCast();
-
-        if (hitObj == null) return false;
-
-        choiceCube.transform.position = hitObj.transform.position;
-
-        int x = (int)choiceCube.transform.position.x;
-        int y = (int)choiceCube.transform.position.z;
-        */
         //ChoicePosition();
         Debug.Log(buildingData[choicePos.x, choicePos.y]);
         if (choicePos.x < 0 || choicePos.y < 0) return false;
@@ -324,19 +310,23 @@ public class MapGenerator : MonoBehaviour {
     public void ChangeRankUPUIImage()
     {
         if (choicePos.x < 0 || choicePos.y < 0) return;
-        Debug.Log("thispos" + (buildingData[choicePos.x, choicePos.y] - 1).ToString());
-        if (buildingData[choicePos.x, choicePos.y] - 1 < 0) return;
-        //uiImages[0].material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+        if (buildingData[choicePos.x, choicePos.y] - 1 < 0)
+        {
+            Debug.Log("NULL");
+            uiController.setRankupUIMaterial(null, 0);
+            uiController.setRankupUIMaterial(null, 1);
+            return;
+        }
+
         uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1], 0);
         if (buildingData[choicePos.x, choicePos.y] < buildingMaterials.Length)
         {
             uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y]], 1);
-            //uiImages[1].material = buildingMaterials[buildingData[choicePos.x, choicePos.y]];
         }
         else
         {
+            Debug.Log("NULL");
             uiController.setRankupUIMaterial(null, 1);
-            //uiImages[1].material = null;
         }
     }
 

@@ -15,6 +15,9 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     Text[] rankupText;
 
+    [SerializeField]
+    Button checkButton;
+     
     // Use this for initialization
     void Start()
     {
@@ -22,6 +25,7 @@ public class UIController : MonoBehaviour {
         {
             buildText[i].text = "商品：" + factory.GetFactoryStatus(i % 2,0).productName + "\n\n生産数：" + factory.GetFactoryStatus(i % 2, 0).productCount + "\n\n建設費：" + factory.GetFactoryStatus(i % 2, 0).rankUpcost;
         }
+        checkButton.interactable = false;
         //StartCoroutine(Wait());
     }
 
@@ -30,8 +34,9 @@ public class UIController : MonoBehaviour {
         buildText[factoryID].text = "商品：" + factory.GetFactoryStatus(factoryID, rank).productName + "\n\n生産数：" + factory.GetFactoryStatus(factoryID, rank).productCount + "\n\n建設費：" + factory.GetFactoryStatus(factoryID, rank).rankUpcost;
     }
 
-    public void setRankupUIMaterial(Material mat,int num)
+    public void setRankupUIMaterial(Material mat, int num)
     {
+        checkButton.interactable = (mat != null);
         rankupUIImages[num].material = mat;
     }
 }
