@@ -100,10 +100,10 @@ public class FactoryManager : MonoBehaviour {
     /// <summary>
     /// 生産
     /// </summary>
-    /// <returns>工場の種類ごとの生産した個数</returns>
+    /// <returns>商品の種類ごとの生産した個数</returns>
     public Dictionary<string, int> Make()
     {
-        Dictionary<string, int> productCount = new Dictionary<string, int>();// = new int[4];//ここの4は商品の種類数
+        Dictionary<string, int> productCount = new Dictionary<string, int>();
 
         for (int i = 0; i < factoryData.Length; i++)
         {

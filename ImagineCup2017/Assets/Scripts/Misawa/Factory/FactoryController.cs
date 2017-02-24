@@ -30,6 +30,7 @@ public class FactoryController : MonoBehaviour {
 
     void Start()
     {
+        buildFactoryID = -1;
         StartCoroutine(PayMaintenance());
     }
 
@@ -83,6 +84,9 @@ public class FactoryController : MonoBehaviour {
             SoundManager.Instance.PlaySE("build");
         }*/
         buildFactoryID = factoryID;
+    }
+
+    public void OnCickPopOpen() {
         if (mapGenerator.CheckCanBuildPos() == true)
         {
             checkPopup.SetActive(true);
@@ -103,7 +107,11 @@ public class FactoryController : MonoBehaviour {
             FactoryStatusData data = factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), 0);
             pollutionStatus.SetPollution(data.pollutionType, data.pollutionDegree);
             SoundManager.Instance.PlaySE("build");
-            buildFactoryID = -1;
+            //buildFactoryID = -1;
+        }
+        else
+        {
+            missPopup.SetActive(true);
         }
     }
 
