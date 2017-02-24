@@ -23,15 +23,26 @@ public class UIController : MonoBehaviour {
     {
         for (int i = 0; i < 4; i++)
         {
-            buildText[i].text = "商品：" + factory.GetFactoryStatus(i % 2,0).productName + "\n\n生産数：" + factory.GetFactoryStatus(i % 2, 0).productCount + "\n\n建設費：" + factory.GetFactoryStatus(i % 2, 0).rankUpcost;
+            buildText[i].text = "商品：" + factory.GetFactoryStatus(i % 2,0).productName 
+                            + "\n生産数：" + factory.GetFactoryStatus(i % 2, 0).productCount
+                            + "\n建設費：" + factory.GetFactoryStatus(i % 2, 0).rankUpcost
+                            + "\n維持費：" + (factory.GetFactoryStatus(i % 2, 0).rankUpcost / 10).ToString();
         }
         checkButton.interactable = false;
-        //StartCoroutine(Wait());
     }
 
-    public void setRankupText(int factoryID,int rank)
+    public void clearRankupText(int num)
     {
-        buildText[factoryID].text = "商品：" + factory.GetFactoryStatus(factoryID, rank).productName + "\n\n生産数：" + factory.GetFactoryStatus(factoryID, rank).productCount + "\n\n建設費：" + factory.GetFactoryStatus(factoryID, rank).rankUpcost;
+        rankupText[num].text = "";
+    }
+
+    public void setRankupText(int factoryID,int rank,int num)
+    {
+        Debug.Log("asdfghjklqwertyuio");
+        rankupText[num].text = "商品：" + factory.GetFactoryStatus(factoryID, rank).productName.ToString()
+                            + "\n生産数：" + factory.GetFactoryStatus(factoryID, rank).productCount.ToString()
+                            + "\n建設費：" + factory.GetFactoryStatus(factoryID, rank).rankUpcost.ToString()
+                            + "\n維持費：" + (factory.GetFactoryStatus(factoryID, rank).rankUpcost/10).ToString();
     }
 
     public void setRankupUIMaterial(Material mat, int num)

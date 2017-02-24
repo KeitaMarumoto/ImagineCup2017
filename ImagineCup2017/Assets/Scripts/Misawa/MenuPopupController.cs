@@ -46,11 +46,11 @@ public class MenuPopupController : MonoBehaviour {
 
         for (int i = 0; i < stockCount.Count; i++)
         {
-            this.stockName[i].text = stockName[i];
-            this.stockNum[i].text = stockNum[i].ToString();
+            this.stockName[i].text = stockName[i]+"個";
+            this.stockNum[i].text = stockNum[i].ToString() + "個";
         }
 
-        maintenanceCost.text = factoryManager.PayMaintenance().ToString();
+        maintenanceCost.text = factoryManager.PayMaintenance().ToString() + "万/日";
 
         Dictionary<string,int> productCount = factoryManager.Make();
         List<string> proName = new List<string>();
@@ -64,8 +64,8 @@ public class MenuPopupController : MonoBehaviour {
 
         for (int i = 0; i < productCount.Count;i++)
         {
-            productName[i].text = proName[i];
-            productNum[i].text = proNum[i].ToString();
+            productName[i].text = proName[i] + "個";
+            productNum[i].text = proNum[i].ToString() + "個";
         }
     }
 

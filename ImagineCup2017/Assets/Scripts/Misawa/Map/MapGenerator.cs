@@ -313,19 +313,24 @@ public class MapGenerator : MonoBehaviour {
         if (buildingData[choicePos.x, choicePos.y] - 1 < 0)
         {
             Debug.Log("NULL");
+            uiController.clearRankupText(0);
             uiController.setRankupUIMaterial(null, 0);
+            uiController.clearRankupText(1);
             uiController.setRankupUIMaterial(null, 1);
             return;
         }
 
+        uiController.setRankupText(GetThisFactoryID(), GetThisFactoryRank(),0);
         uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1], 0);
         if (buildingData[choicePos.x, choicePos.y] < buildingMaterials.Length)
         {
+            uiController.setRankupText(GetThisFactoryID(), GetThisFactoryRank()+1,1);
             uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y]], 1);
         }
         else
         {
             Debug.Log("NULL");
+            uiController.clearRankupText(1);
             uiController.setRankupUIMaterial(null, 1);
         }
     }
