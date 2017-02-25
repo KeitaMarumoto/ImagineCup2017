@@ -54,15 +54,14 @@ public class ProductRegister : MonoBehaviour {
         products[key].NumberOfProducts += num;
     }
 
-    public void tesLog()
+    public Dictionary<string,int> getNumberOfProducts()
     {
-        string message = "";
+        Dictionary<string, int> numberOfProducts = new Dictionary<string, int>();
         foreach (KeyValuePair<string, ProductData> prod_ in products)
         {
-            message += "Name : " + prod_.Value.Name + " | "
-                    + "Number : " + prod_.Value.NumberOfProducts.ToString() + "\n";
+            numberOfProducts.Add(prod_.Value.Name,prod_.Value.NumberOfProducts);
         }
-        Debug.Log(message);
+        return numberOfProducts;
     }
 
     //デバッグ用:商品データを確実に登録できているかの確認用。

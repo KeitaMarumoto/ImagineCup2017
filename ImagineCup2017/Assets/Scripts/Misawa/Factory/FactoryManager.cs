@@ -100,10 +100,10 @@ public class FactoryManager : MonoBehaviour {
     /// <summary>
     /// 生産
     /// </summary>
-    /// <returns>工場の種類ごとの生産した個数</returns>
+    /// <returns>商品の種類ごとの生産した個数</returns>
     public Dictionary<string, int> Make()
     {
-        Dictionary<string, int> productCount = new Dictionary<string, int>();// = new int[4];//ここの4は商品の種類数
+        Dictionary<string, int> productCount = new Dictionary<string, int>();
 
         for (int i = 0; i < factoryData.Length; i++)
         {
@@ -118,4 +118,41 @@ public class FactoryManager : MonoBehaviour {
         return productCount;
     }
 
+    /// <summary>
+    /// 生産時に発生した汚染
+    /// </summary>
+    /// <returns>汚染度</returns>
+    public Dictionary<string, float> MakePollution()
+    {
+        Dictionary<string, float> pollution = new Dictionary<string, float>();// = new int[4];//ここの4は商品の種類数
+
+        for (int i = 0; i < factoryData.Length; i++)
+        {
+            for (int j = 0; j < maxFactoryRank; j++)
+            {
+                if (pollution.ContainsKey(factoryData[i].factoryStatus[j].pollutionType))
+                    pollution[factoryData[i].factoryStatus[j].pollutionType] += factoryData[i].factoryStatus[j].pollutionDegree * 0.01f * factoriesCount[i, j];
+                else
+                    pollution.Add(factoryData[i].factoryStatus[j].pollutionType, factoryData[i].factoryStatus[j].pollutionDegree * 0.01f * factoriesCount[i, j]);
+            }
+        }
+        return pollution;
+    }
+
+    /// <summary>
+    /// 全工場の維持費の総計を調べる
+    /// </summary>
+    /// <returns>維持費の総計</returns>
+    public int PayMaintenance()
+    {
+        int num = 0;
+        for (int factoryID = 0; factoryID < factoriesCount.GetLength(0); factoryID++)
+        {
+            for (int rank = 0; rank < factoriesCount.GetLength(1); rank++)
+            {
+                num += (factoryData[factoryID].factoryStatus[rank].rankUpcost / 10) * factoriesCount[factoryID, rank];
+            }
+        }
+        return num;
+    }
 }
