@@ -25,6 +25,7 @@ public class CameraController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         cam = GetComponent<Camera>();
+        SoundManager.Instance.PlayBGM("mainBGM");
 	}
 	
 	// Update is called once per frame

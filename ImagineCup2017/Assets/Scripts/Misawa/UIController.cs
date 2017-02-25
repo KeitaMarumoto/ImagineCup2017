@@ -13,6 +13,9 @@ public class UIController : MonoBehaviour {
     Text[] buildText;
 
     [SerializeField]
+    Toggle[] buildButtons;
+
+    [SerializeField]
     Text[] rankupText;
 
     [SerializeField]
@@ -23,12 +26,35 @@ public class UIController : MonoBehaviour {
     {
         for (int i = 0; i < 4; i++)
         {
-            buildText[i].text = "商品：" + factory.GetFactoryStatus(i % 2,0).productName 
-                            + "\n生産数：" + factory.GetFactoryStatus(i % 2, 0).productCount
-                            + "\n建設費：" + factory.GetFactoryStatus(i % 2, 0).rankUpcost
-                            + "\n維持費：" + (factory.GetFactoryStatus(i % 2, 0).rankUpcost / 10).ToString();
+            if (factory.CanBuild(i) == true)
+            {
+                buildButtons[i].interactable = true;
+
+                buildText[i].text = "商品：" + factory.GetFactoryStatus(i % 4, 0).productName
+                                + "\n生産数：" + factory.GetFactoryStatus(i % 4, 0).productCount
+                                + "\n建設費：" + factory.GetFactoryStatus(i % 4, 0).rankUpcost
+                                + "\n維持費：" + (factory.GetFactoryStatus(i % 4, 0).rankUpcost / 10).ToString();
+            }
+            else
+            {
+                buildButtons[i].interactable = false;
+
+                buildText[i].text = "商品：" + "?????"
+                                + "\n生産数：" + "?????"
+                                + "\n建設費：" + "?????"
+                                + "\n維持費：" + "?????";
+            }
         }
         checkButton.interactable = false;
+    }
+
+    public void setBuidStatusUI(int id)
+    {
+        buildButtons[id].interactable = true;
+        buildText[id].text = "商品：" + factory.GetFactoryStatus(id, 0).productName
+                        + "\n生産数：" + factory.GetFactoryStatus(id, 0).productCount
+                        + "\n建設費：" + factory.GetFactoryStatus(id, 0).rankUpcost
+                        + "\n維持費：" + (factory.GetFactoryStatus(id, 0).rankUpcost / 10).ToString();
     }
 
     public void clearRankupText(int num)
