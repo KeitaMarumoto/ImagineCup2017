@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// あるタブ群すべてを管理するクラス。
+/// </summary>
 public class IndustryTabManager : MonoBehaviour {
 	private static IndustryTabManager instance;
 	public static IndustryTabManager Instance
