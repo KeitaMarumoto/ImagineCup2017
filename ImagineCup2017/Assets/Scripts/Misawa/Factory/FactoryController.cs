@@ -194,9 +194,13 @@ public class FactoryController : MonoBehaviour {
         int maintenanceCost = 0;
         while (true)
         {
-            yield return new WaitForSeconds(1.0f);
-            maintenanceCost = factoryManager.PayMaintenance();
-            fundsController.FundsValueChange(-maintenanceCost);
+            if (StateManager.state == StateManager.State.PRODUCTION)
+            {
+                yield return new WaitForSeconds(1.0f);
+                maintenanceCost = factoryManager.PayMaintenance();
+                fundsController.FundsValueChange(-maintenanceCost);
+            }
+            else yield return null;
         }
     }
 

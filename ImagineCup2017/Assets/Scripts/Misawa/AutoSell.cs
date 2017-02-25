@@ -43,12 +43,16 @@ public class AutoSell : MonoBehaviour
     {
         while (true)
         {
-            if (productRegister.getProductDatas()[key].NumberOfProducts > 0)
+            if (StateManager.state == StateManager.State.PRODUCTION)
             {
-                productRegister.NumberOfProductsValueChange(key, -1);
-                fundsController.FundsValueChange(productRegister.getProductDatas()[key].UnitPrice);
+                if (productRegister.getProductDatas()[key].NumberOfProducts > 0)
+                {
+                    productRegister.NumberOfProductsValueChange(key, -1);
+                    fundsController.FundsValueChange(productRegister.getProductDatas()[key].UnitPrice);
+                }
+                yield return new WaitForSeconds(productRegister.getProductDatas()[key].SecondsToSell);
             }
-            yield return new WaitForSeconds(productRegister.getProductDatas()[key].SecondsToSell);
+            else yield return null;
         }
     }
 

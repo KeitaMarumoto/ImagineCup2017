@@ -25,9 +25,14 @@ public class Population : MonoBehaviour {
     {
         while (true)
         {
-            population += (int)((rate.Evaluate(pollutionStatus.SumPollution) -0.5)*100);
-            populationText.text = population.ToString();
-            yield return new WaitForSeconds(0.1f);
+            if (StateManager.state == StateManager.State.PRODUCTION)
+            {
+
+                population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.5) * 100);
+                populationText.text = population.ToString();
+                yield return new WaitForSeconds(0.1f);
+            }
+            else yield return null;
         }
     }
     // Update is called once per frame
