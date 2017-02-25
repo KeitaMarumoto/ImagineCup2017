@@ -38,11 +38,13 @@ public class UIController : MonoBehaviour {
 
     public void setRankupText(int factoryID,int rank,int num)
     {
-        Debug.Log("asdfghjklqwertyuio");
         rankupText[num].text = "商品：" + factory.GetFactoryStatus(factoryID, rank).productName.ToString()
                             + "\n生産数：" + factory.GetFactoryStatus(factoryID, rank).productCount.ToString()
-                            + "\n建設費：" + factory.GetFactoryStatus(factoryID, rank).rankUpcost.ToString()
                             + "\n維持費：" + (factory.GetFactoryStatus(factoryID, rank).rankUpcost/10).ToString();
+        if(num == 1)
+        {
+            rankupText[num].text += "\n建設費：" + factory.GetFactoryStatus(factoryID, rank).rankUpcost.ToString();
+        }
     }
 
     public void setRankupUIMaterial(Material mat, int num)

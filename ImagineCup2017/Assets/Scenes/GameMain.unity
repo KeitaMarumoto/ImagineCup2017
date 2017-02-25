@@ -2298,13 +2298,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'asd
-
-    asd
-
-    asd
-
-    asd'
+  m_Text: 
 --- !u!222 &557756204
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3547,40 +3541,40 @@ MonoBehaviour:
     constructionCost: 1
     factoryStatus:
     - productName: Toy
-      rankUpcost: 30
+      rankUpcost: 200
       productCount: 20
       pollutionType: CO2
-      pollutionDegree: 0.14
+      pollutionDegree: 0.016
     - productName: Game
-      rankUpcost: 30
+      rankUpcost: 500
       productCount: 40
       pollutionType: CO2
-      pollutionDegree: 0.173
+      pollutionDegree: 0.0276
     - productName: Tool
-      rankUpcost: 30
+      rankUpcost: 1000
       productCount: 60
       pollutionType: CO2
-      pollutionDegree: 0.259
+      pollutionDegree: 0.0435
   - factoryName: "\u5DE5\u5834B"
     factoryRank: 0
     canBuild: 0
     constructionCost: 1
     factoryStatus:
     - productName: Game
-      rankUpcost: 30
+      rankUpcost: 500
       productCount: 10
       pollutionType: CO2
-      pollutionDegree: 0.1
+      pollutionDegree: 0.0232
     - productName: Game
-      rankUpcost: 30
+      rankUpcost: 1000
       productCount: 40
       pollutionType: CO2
-      pollutionDegree: 0.2
+      pollutionDegree: 0.0474
     - productName: Game
-      rankUpcost: 30
+      rankUpcost: 2000
       productCount: 20
       pollutionType: CO2
-      pollutionDegree: 0.3
+      pollutionDegree: 0.071
 --- !u!4 &831724338
 Transform:
   m_ObjectHideFlags: 0
@@ -6171,7 +6165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: sadfgh
+  m_Text: 
 --- !u!222 &1410494328
 CanvasRenderer:
   m_ObjectHideFlags: 0
