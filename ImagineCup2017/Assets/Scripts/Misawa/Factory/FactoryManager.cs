@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FactoryManager : MonoBehaviour {
+    [SerializeField]
+    UIController ui;
+
     [SerializeField, Space(15)]
     public int maxFactoryRank;
 
@@ -39,7 +42,20 @@ public class FactoryManager : MonoBehaviour {
             }
         }
     }
-	
+
+    //テスト用
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Unrock(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Unrock(3);
+        }
+    }
+
     /// <summary>
     /// 工場数を返す
     /// </summary>
@@ -50,10 +66,26 @@ public class FactoryManager : MonoBehaviour {
         return factoriesCount[factoryID, rank-1];
     }
 
+    /// <summary>
+    /// その種類の工場が建てられるか？
+    /// </summary>
+    /// <param name="factoryID">工場番号</param>
+    /// <returns></returns>
     public bool CanBuild(int factoryID)
     {
         return factoryData[factoryID].canBuild;
     }
+
+    /// <summary>
+    /// その種類の工場を建てられるようにする
+    /// </summary>
+    /// <param name="factoryID">工場番号</param>
+    public void Unrock(int factoryID)
+    {
+        ui.setBuidStatusUI(factoryID);
+        factoryData[factoryID].canBuild = true;
+    }
+
     /// <summary>
     /// 工場建設
     /// </summary>

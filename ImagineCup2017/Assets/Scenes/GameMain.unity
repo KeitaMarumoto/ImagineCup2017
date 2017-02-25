@@ -531,7 +531,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 3ecd83d793e7b9247af3f0cb0a3d96c3, type: 3}
+  m_Texture: {fileID: 2800000, guid: b9376aab5174f444aacddd12e18b33b1, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2827,7 +2827,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3146,6 +3146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0dbc9f740befc84a8cc7d776e58b8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 861716905}
   maxFactoryRank: 3
   factoryData:
   - factoryName: "\u5DE5\u5834A"
@@ -3169,6 +3170,46 @@ MonoBehaviour:
       pollutionType: CO2
       pollutionDegree: 0.259
   - factoryName: "\u5DE5\u5834B"
+    factoryRank: 0
+    canBuild: 1
+    constructionCost: 1
+    factoryStatus:
+    - productName: Game
+      rankUpcost: 30
+      productCount: 10
+      pollutionType: CO2
+      pollutionDegree: 0.1
+    - productName: Game
+      rankUpcost: 30
+      productCount: 40
+      pollutionType: CO2
+      pollutionDegree: 0.2
+    - productName: Game
+      rankUpcost: 30
+      productCount: 20
+      pollutionType: CO2
+      pollutionDegree: 0.3
+  - factoryName: "\u5DE5\u5834C"
+    factoryRank: 0
+    canBuild: 0
+    constructionCost: 1
+    factoryStatus:
+    - productName: Game
+      rankUpcost: 30
+      productCount: 10
+      pollutionType: CO2
+      pollutionDegree: 0.1
+    - productName: Game
+      rankUpcost: 30
+      productCount: 40
+      pollutionType: CO2
+      pollutionDegree: 0.2
+    - productName: Game
+      rankUpcost: 30
+      productCount: 20
+      pollutionType: CO2
+      pollutionDegree: 0.3
+  - factoryName: "\u5DE5\u5834D"
     factoryRank: 0
     canBuild: 0
     constructionCost: 1
@@ -3335,6 +3376,11 @@ MonoBehaviour:
   - {fileID: 716661216}
   - {fileID: 1974822295}
   - {fileID: 1783597085}
+  buildButtons:
+  - {fileID: 824002545}
+  - {fileID: 2121035884}
+  - {fileID: 785147637}
+  - {fileID: 2008898074}
   rankupText:
   - {fileID: 1410494327}
   - {fileID: 557756203}
@@ -3675,7 +3721,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0568070482bc1144cb832b3fc3475df3, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3ecd83d793e7b9247af3f0cb0a3d96c3, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6996,10 +7042,16 @@ MonoBehaviour:
   buildingMaterials:
   - {fileID: 2100000, guid: 71a8e1c1caeedfe4881e442fcd7dadcd, type: 2}
   - {fileID: 2100000, guid: fa116657e343c5c419c54d01baae52c1, type: 2}
+  - {fileID: 2100000, guid: 71a8e1c1caeedfe4881e442fcd7dadcd, type: 2}
+  - {fileID: 2100000, guid: 0571132696c69fd44abd649080c59dc5, type: 2}
+  - {fileID: 2100000, guid: 0571132696c69fd44abd649080c59dc5, type: 2}
   - {fileID: 2100000, guid: 0571132696c69fd44abd649080c59dc5, type: 2}
   - {fileID: 2100000, guid: 940ce0d6de3178744a254db1995c1a3c, type: 2}
+  - {fileID: 2100000, guid: 940ce0d6de3178744a254db1995c1a3c, type: 2}
+  - {fileID: 2100000, guid: 940ce0d6de3178744a254db1995c1a3c, type: 2}
   - {fileID: 2100000, guid: eb001e72480e76e4d9feba927f6e53e7, type: 2}
-  - {fileID: 2100000, guid: 71a8e1c1caeedfe4881e442fcd7dadcd, type: 2}
+  - {fileID: 2100000, guid: eb001e72480e76e4d9feba927f6e53e7, type: 2}
+  - {fileID: 2100000, guid: eb001e72480e76e4d9feba927f6e53e7, type: 2}
   buildingParent: {fileID: 831724336}
   choiceCubeMaterials: {fileID: 2100000, guid: 48faf4610db064e4eb19b481ec8972cf, type: 2}
   uiController: {fileID: 861716905}
@@ -7386,7 +7438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1729597168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9175,7 +9227,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9338,7 +9390,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 3ecd83d793e7b9247af3f0cb0a3d96c3, type: 3}
+  m_Texture: {fileID: 2800000, guid: 19c2b58d9c65fb944a701e4ee161b954, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
