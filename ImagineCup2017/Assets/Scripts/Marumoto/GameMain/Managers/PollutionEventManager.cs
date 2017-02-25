@@ -25,6 +25,8 @@ public class PollutionEventManager : MonoBehaviour {
 	BackgroundSky backgroundSky;
 	[SerializeField]
 	PollutionStatus pollutionStatus;
+    [SerializeField]
+    PollutionMap pollutionMap;
 
 	WorldStatus worldStatus;
 	WorldStatus oldWorldStatus;
@@ -56,7 +58,8 @@ public class PollutionEventManager : MonoBehaviour {
 				oldWorldStatus = worldStatus;
 
 				backgroundSky.ChangeBackground(worldStatus);
-			}
+                pollutionMap.ChangeTexture(worldStatus);
+            }
 			yield return new WaitForSeconds(0.3f);
 		}
 	}

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class PollutionMap : MonoBehaviour {
 
     [SerializeField]
+    PollutionEventManager pollutionEventManager;
+
+    [SerializeField]
     Material groundMat;
 
     [SerializeField]
@@ -29,8 +32,8 @@ public class PollutionMap : MonoBehaviour {
         }
     }
 
-    public void ChangeTexture (float sumPollution_) {
-        if (sumPollution_ > 0.75) {
+    public void ChangeTexture (/*float sumPollution_*/WorldStatus worldStatus) {
+        if (/*sumPollution_ > 0.75*/worldStatus == WorldStatus.DIRTY) {
             groundMat.mainTexture = groundTextures[2];
             waterMat.mainTexture = waterTextures[2];
             foreach (var mat in seaMats)
@@ -38,7 +41,7 @@ public class PollutionMap : MonoBehaviour {
                 mat.mainTexture = waterTextures[2];
             }
         }
-        else if (sumPollution_ > 0.5) {
+        else if (/*sumPollution_ > 0.5*/worldStatus == WorldStatus.STAGNANT) {
             groundMat.mainTexture = groundTextures[1];
             waterMat.mainTexture = waterTextures[1];
             foreach (var mat in seaMats)

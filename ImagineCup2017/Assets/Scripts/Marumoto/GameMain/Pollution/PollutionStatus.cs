@@ -6,8 +6,8 @@ public class PollutionStatus : MonoBehaviour {
 	[SerializeField]
 	RectTransform gauge_;
 
-    [SerializeField]
-    PollutionMap pollutionMap;
+    //[SerializeField]
+    //PollutionMap pollutionMap;
 
 	Vector3 basePosition_;
 
@@ -59,7 +59,7 @@ public class PollutionStatus : MonoBehaviour {
 
 			foreach (var key_ in keys_)
 			{
-				float updateValue_ = Pollutions[key_] - 0.01f;
+				float updateValue_ = Pollutions[key_]/* - 0.01f*/;
 				updateValue_ = ClumpingPollution(updateValue_);
 				Pollutions[key_] = updateValue_;
 			}
@@ -76,7 +76,7 @@ public class PollutionStatus : MonoBehaviour {
 			result_ += value_.Value;
 		}
 		SumPollution = ClumpingPollution(result_);
-        pollutionMap.ChangeTexture(SumPollution);
+        //pollutionMap.ChangeTexture(SumPollution);
         UpdateGauge();
 	}
 
@@ -97,6 +97,7 @@ public class PollutionStatus : MonoBehaviour {
 
 	void UpdateGauge()
 	{
+        Debug.Log("SumPollution" + SumPollution);
 		Debug.Log("rect.height : " + gauge_.rect.height);
 		gauge_.localPosition = new Vector3(basePosition_.x,
 										   basePosition_.y + gauge_.rect.height * SumPollution,
