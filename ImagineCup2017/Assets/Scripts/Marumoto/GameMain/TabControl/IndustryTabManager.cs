@@ -54,7 +54,7 @@ public class IndustryTabManager : MonoBehaviour {
 	/// </summary>
 	public void ClosingTab()
 	{
-		//tabControls[_tabIndex].OnClickLightIsOut();
+		SoundManager.Instance.PlaySE("close");
 		foreach(TabControl tab_ in tabControls)
 		{
 			tab_.OnClickClosing();
@@ -78,7 +78,10 @@ public class IndustryTabManager : MonoBehaviour {
         if(_tabIndex == 0) { StateManager.state = StateManager.State.BUILD; }
         else if (_tabIndex == 1) { StateManager.state = StateManager.State.RANKUP; }
 
-        tabControls[_tabIndex].ActiveEasing();
+		foreach(TabControl tab_ in tabControls)
+		{
+			tab_.ActiveEasing();
+		}
 	}
 
 	/// <summary>
@@ -141,10 +144,7 @@ public class IndustryTabManager : MonoBehaviour {
 			Debug.Log(hit3D.collider.tag);
 			if (hit3D.transform.tag == "IndustryTab")
 			{
-				if (!IsAnyDisplaying())
-				{
-					hit3D.transform.SetAsLastSibling();
-				}
+				hit3D.transform.SetAsLastSibling();
 				isPullingTab = true;
 			}
 		}
@@ -158,18 +158,23 @@ public class IndustryTabManager : MonoBehaviour {
 		if (!IsTappingUp()) return;
 		isPullingTab = false;
 		SetupEndPos();
-
-		if (!IsDrag()) return;
-
 		RaycastHit hit3D = Raycast();
+
+		if (!IsDrag())
+		{
+			if(hit3D.transform.tag == "IndustryTab")
+			{
+				SoundManager.Instance.PlaySE("tab_click");
+			}
+			return;
+		}
+
 		if (hit3D.collider)
 		{
 			if (hit3D.transform.tag == "IndustryTab")
 			{
-				if (!IsAnyDisplaying())
-				{
-					hit3D.transform.SetAsLastSibling();
-				}
+				SoundManager.Instance.PlaySE("open");
+				hit3D.transform.SetAsLastSibling();
 				DisplayingTab(hit3D);
 			}
 		}
