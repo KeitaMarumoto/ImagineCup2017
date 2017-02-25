@@ -3171,7 +3171,7 @@ MonoBehaviour:
       pollutionDegree: 0.259
   - factoryName: "\u5DE5\u5834B"
     factoryRank: 0
-    canBuild: 1
+    canBuild: 0
     constructionCost: 1
     factoryStatus:
     - productName: Game
