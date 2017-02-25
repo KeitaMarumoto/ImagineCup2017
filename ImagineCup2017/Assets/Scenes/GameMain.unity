@@ -1566,6 +1566,7 @@ GameObject:
   - 224: {fileID: 862931797}
   - 222: {fileID: 862931799}
   - 114: {fileID: 862931798}
+  - 114: {fileID: 862931800}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1624,6 +1625,22 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 862931796}
+--- !u!114 &862931800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 862931796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0678d9438d2a880408b2f4bbceb93d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgrounds:
+  - {fileID: 21300000, guid: 753babfc4647a6544b6f4cebe9a83231, type: 3}
+  - {fileID: 21300000, guid: 0b939d29161a8c84292e5feedb280582, type: 3}
+  - {fileID: 21300000, guid: 2fe106a0180b87a42923a17c4d6dc694, type: 3}
+  image: {fileID: 862931798}
 --- !u!1 &871955273
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,6 +4153,48 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!1 &1850760045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1850760046}
+  - 114: {fileID: 1850760047}
+  m_Layer: 0
+  m_Name: PollutionEventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1850760046
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850760045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+--- !u!114 &1850760047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850760045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a695b6ed889d530418d1aae67b3a3c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundSky: {fileID: 862931800}
+  pollutionStatus: {fileID: 1792761963}
 --- !u!1 &1856034182
 GameObject:
   m_ObjectHideFlags: 0
@@ -5175,7 +5234,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 1298027501}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 900
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
