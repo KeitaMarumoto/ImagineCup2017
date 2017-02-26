@@ -109,7 +109,24 @@ public class FactoryController : MonoBehaviour {
     public void OnClickBuildButton()
     {
         if (buildFactoryID < 0) return;
-        if (mapGenerator.CreateBuilding(buildFactoryID))
+
+        int productID = 0;
+        switch (factoryManager.GetFactoryStatus(buildFactoryID, 0).productName)
+        {
+            case "Toy":
+                productID = 0;
+                break;
+            case "Game":
+                productID = 1;
+                break;
+            case "Tool":
+                productID = 2;
+                break;
+            default:
+                productID = 0;
+                break;
+        }
+        if (mapGenerator.CreateBuilding(buildFactoryID, productID))
         {
             int cost = factoryManager.Construction(mapGenerator.GetThisFactoryID());
             fundsController.FundsValueChange(-cost);
@@ -132,6 +149,7 @@ public class FactoryController : MonoBehaviour {
         }
     }
 
+    /*
     IEnumerator BuildNewFactory(int buildFactoryID)
     {
         while (StateManager.state == StateManager.State.BUILD)
@@ -151,7 +169,7 @@ public class FactoryController : MonoBehaviour {
             }
             yield return null;
         }
-    }
+    }*/
 
     public void OnClickRankUpButton()
     {
@@ -188,7 +206,23 @@ public class FactoryController : MonoBehaviour {
 
     void RankUpFactory()
     {
-        if (mapGenerator.RankUpBuilding())
+        int productID = 0;
+        switch (factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank()+1).productName)
+        {
+            case "Toy":
+                productID = 0;
+                break;
+            case "Game":
+                productID = 1;
+                break;
+            case "Tool":
+                productID = 2;
+                break;
+            default:
+                productID = 0;
+                break;
+        }
+        if (mapGenerator.RankUpBuilding(productID))
         {
             int cost = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
             fundsController.FundsValueChange(-cost);

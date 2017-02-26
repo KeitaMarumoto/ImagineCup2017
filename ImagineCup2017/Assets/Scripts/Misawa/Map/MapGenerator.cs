@@ -184,7 +184,7 @@ public class MapGenerator : MonoBehaviour {
     /// </summary>
     /// <param name="factoryID">建てたい工場のID</param>
     /// <returns>建てるのに成功したか</returns>
-    public bool CreateBuilding(int factoryID)
+    public bool CreateBuilding(int factoryID,int productID)
     {
         //ChoicePosition();
         if (choicePos.x < 0 || choicePos.y < 0) return false;
@@ -198,7 +198,7 @@ public class MapGenerator : MonoBehaviour {
         quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
 
         //Particleの生成
-        GameObject particle = Instantiate(itemParticles[0]) as GameObject;
+        GameObject particle = Instantiate(itemParticles[productID]) as GameObject;
         particle.transform.SetParent(quad.transform);
         particle.transform.localPosition = Vector3.zero;
         particle.transform.localRotation = Quaternion.Euler(-25, -180, 0);
@@ -225,7 +225,7 @@ public class MapGenerator : MonoBehaviour {
     /// 工場のランクを上げる
     /// </summary>
     /// <returns>ランクを上げることに成功したか</returns>
-    public bool RankUpBuilding()
+    public bool RankUpBuilding(int productID)
     {
         //ChoicePosition();
         if (choicePos.x < 0 || choicePos.y < 0) return false;
@@ -234,6 +234,16 @@ public class MapGenerator : MonoBehaviour {
 
         buildingData[choicePos.x, choicePos.y]++;
         buildingObjects[choicePos.x, choicePos.y].GetComponent<Renderer>().material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+
+        //Particleの生成
+        Debug.Log("productID" + productID);
+        GameObject particle = Instantiate(itemParticles[productID]) as GameObject;
+        particle.transform.SetParent(buildingObjects[choicePos.x, choicePos.y].transform);
+        particle.transform.localPosition = Vector3.zero;
+        particle.transform.localRotation = Quaternion.Euler(-25, -180, 0);
+        ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+
+        particleObjects[choicePos.x, choicePos.y] = particleSystem;
 
         ChangeRankUPUIImage();
 
@@ -317,7 +327,7 @@ public class MapGenerator : MonoBehaviour {
 
         uiController.setRankupText(GetThisFactoryID(), GetThisFactoryRank(),0);
         uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1], 0);
-        if (buildingData[choicePos.x, choicePos.y] < buildingMaterials.Length)
+        if (buildingData[choicePos.x, choicePos.y] < (GetThisFactoryID() *3) + /*buildingMaterials.Length*/3)
         {
             uiController.setRankupText(GetThisFactoryID(), GetThisFactoryRank()+1,1);
             uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y]], 1);

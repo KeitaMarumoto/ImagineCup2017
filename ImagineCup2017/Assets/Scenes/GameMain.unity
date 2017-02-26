@@ -3299,17 +3299,17 @@ MonoBehaviour:
     constructionCost: 1
     factoryStatus:
     - productName: Toy
-      rankUpcost: 100000
+      rankUpcost: 0
       productCount: 100
       pollutionType: CO2
       pollutionDegree: 0.1
     - productName: Tool
-      rankUpcost: 20000
+      rankUpcost: 0
       productCount: 100
       pollutionType: CO2
       pollutionDegree: 0.1
     - productName: Game
-      rankUpcost: 20000
+      rankUpcost: 0
       productCount: 50
       pollutionType: CO2
       pollutionDegree: 0.1
@@ -7343,6 +7343,8 @@ MonoBehaviour:
   groundParent: {fileID: 336097051}
   itemParticles:
   - {fileID: 1000012642921308, guid: 03f07b2bf1e0cd240b17346c79f1f17a, type: 2}
+  - {fileID: 1000012642921308, guid: da87e5f7eece72b42ab38843b4924b9e, type: 2}
+  - {fileID: 1000012642921308, guid: 41fbf69a2b976f243a7d529202737a67, type: 2}
   maxRank: 3
   buildingMaterials:
   - {fileID: 2100000, guid: 71a8e1c1caeedfe4881e442fcd7dadcd, type: 2}
