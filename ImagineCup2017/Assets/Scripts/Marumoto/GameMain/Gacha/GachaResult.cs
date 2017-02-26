@@ -60,10 +60,10 @@ public class GachaResult : MonoBehaviour {
 		}
 		else
 		{
-			if (!GachaManager.Instance.CanBuild((int)DATABASE_ELEMENTS.INDEX))
+			if (!GachaManager.Instance.CanBuild(Convert.ToInt32(resultDatas[(int)DATABASE_ELEMENTS.INDEX])))
 			{
 				message_ = SuccessText();
-				GachaManager.Instance.UnlockFactory((int)DATABASE_ELEMENTS.INDEX);
+				GachaManager.Instance.UnlockFactory(Convert.ToInt32(resultDatas[(int)DATABASE_ELEMENTS.INDEX]));
 			}
 			else
 			{

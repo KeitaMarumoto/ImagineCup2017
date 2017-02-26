@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -35,6 +36,8 @@ public class PollutionEventManager : MonoBehaviour {
 	[SerializeField]
 	Transform eventStillParent;
 
+	List<string> eventNewsText = new List<string>();
+
 	WorldStatus worldStatus;
 	WorldStatus oldWorldStatus;
 
@@ -43,6 +46,7 @@ public class PollutionEventManager : MonoBehaviour {
 		if (instance == null) instance = this;
 		worldStatus = WorldStatus.CLEAR;
 		oldWorldStatus = worldStatus;
+		EventTextSetup();
 	}
 
 	void Start()
@@ -140,5 +144,23 @@ public class PollutionEventManager : MonoBehaviour {
 		{
 			Instantiate(eventPrefab, eventStillParent, false);
 		}
+	}
+
+	void EventTextSetup()
+	{
+		string str_1 = "国が豊かになりましたが、" + "\n"
+					 + "環境問題が深刻になっています。";
+
+		string str_2 = "地球全体が汚染されています。" + "\n"
+					 + "生物が生きられる環境ではありません！";
+
+		eventNewsText.Add(str_1);
+		eventNewsText.Add(str_2);
+	}
+
+	public string GetNewsText()
+	{
+		if (worldStatus == WorldStatus.CLEAR) return null;
+		return eventNewsText[(int)worldStatus - 1];
 	}
 }

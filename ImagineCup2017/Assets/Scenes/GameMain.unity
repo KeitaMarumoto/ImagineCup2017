@@ -164,6 +164,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   pollutionStatus: {fileID: 1792761963}
+  gameOverManager: {fileID: 0}
 --- !u!1 &16228362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,7 +3415,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fundsText: {fileID: 1520466616}
-  gameOverManager: {fileID: 1794934891}
 --- !u!4 &774295100
 Transform:
   m_ObjectHideFlags: 0

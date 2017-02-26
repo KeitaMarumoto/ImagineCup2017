@@ -527,8 +527,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE5\u5834D         2%\n\u5DE5\u5834C       12%\n\u5DE5\u5834B       50%\n\u7814\u7A76\u5931\u6557
-    \ 26%\n"
+  m_Text: "\u5DE5\u5834D       10%\n\u5DE5\u5834C       20%\n\u5DE5\u5834B       50%\n\u7814\u7A76\u5931\u6557
+    \ 20%\n"
 --- !u!114 &114000013101278136
 MonoBehaviour:
   m_ObjectHideFlags: 1
