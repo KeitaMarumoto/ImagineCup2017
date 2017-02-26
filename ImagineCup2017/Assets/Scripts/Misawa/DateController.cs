@@ -41,6 +41,6 @@ public class DateController : MonoBehaviour {
 
     void DateTextUpdate()
     {
-        dateText.text = date.ToString() + "日目";
+        dateText.text = date.ToString() + "週目";
     }
 }

@@ -43,7 +43,7 @@ public class GameOverManager : MonoBehaviour {
             button.SetActive(false);
         }
         StateManager.state = StateManager.State.EVENT;
-        resultText.text = dateController.Date.ToString() + "日後、\nこの星から人はいなくなりました";
+        resultText.text = dateController.Date.ToString() + "週間後、\nこの星から人はいなくなりました";
         SoundManager.Instance.PlayBGM("eventBGM");
         StartCoroutine(GameOverTaskManager());
     }
@@ -133,7 +133,7 @@ public class GameOverManager : MonoBehaviour {
 
     public void OnclickTweetResult()
     {
-        Application.OpenURL("http://twitter.com/intent/tweet?text=" + WWW.EscapeURL("ゲーム開始から"+dateController.Date.ToString() +"日後、星から人がいなくなりました。 #EarthEater"));
+        Application.OpenURL("http://twitter.com/intent/tweet?text=" + WWW.EscapeURL("ゲーム開始から"+dateController.Date.ToString() + "週間後、星から人がいなくなりました。 #EarthEater"));
     }
 
     public void BackTitleScene()
