@@ -50,7 +50,7 @@ public class MenuPopupController : MonoBehaviour {
             this.stockNum[i].text = stockNum[i].ToString() + "個";
         }
 
-        maintenanceCost.text = factoryManager.PayMaintenance().ToString() + "万/日";
+        maintenanceCost.text = factoryManager.PayMaintenance().ToString();
 
         Dictionary<string,int> productCount = factoryManager.Make();
         List<string> proName = new List<string>();
