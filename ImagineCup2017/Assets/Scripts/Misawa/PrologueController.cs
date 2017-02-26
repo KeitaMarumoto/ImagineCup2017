@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PrologueController : MonoBehaviour {
@@ -10,10 +11,19 @@ public class PrologueController : MonoBehaviour {
     Sprite[] prologueSprites;
 
     [SerializeField]
+    Text text;
+
+    [SerializeField]
     GameObject next;
 
     [SerializeField]
-    GameObject startButton; 
+    GameObject startButton;
+
+    string[] prologueText = {
+        "ある国の王さまは、\nどうやって国を今より\nよくできるかなやんでいました",
+        "王さまの元気がないことを\n知ったネコのリアンは、\n王さまに声をかけました。",
+        "王さまはこう言いました。\n｢もっと皆を幸せにしたい。\n便利な国にしたい｣と。",
+        "リアンは胸を張って答えました。\n｢分かりました！\n僕がなんとかしてみせます！｣"};
 
     int pageCount;
 
@@ -35,11 +45,15 @@ public class PrologueController : MonoBehaviour {
             {
                 pageCount++;
                 prologueImage.sprite = prologueSprites[pageCount];
-                if(pageCount == prologueSprites.Length - 1)
+                text.text = prologueText[pageCount];
+                if (pageCount == prologueSprites.Length-1)
                 {
                     next.SetActive(false);
-                    startButton.SetActive(true);
                 }
+            }
+            else
+            {
+                SceneManager.LoadScene("GameMain");
             }
         }
 	}
@@ -53,7 +67,7 @@ public class PrologueController : MonoBehaviour {
             if (next.activeInHierarchy == false) break;
             Debug.Log("asdfg");
             num +=0.1f;
-            transform.localPosition = new Vector3(325+Mathf.Sin(num)*25,-800,0);
+            transform.localPosition = new Vector3(400+Mathf.Sin(num)*10,-850,0);
             yield return null;
         }
     }
