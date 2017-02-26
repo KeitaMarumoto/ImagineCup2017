@@ -13,6 +13,9 @@ public class Population : MonoBehaviour {
     [SerializeField]
     PollutionStatus pollutionStatus;
 
+    [SerializeField]
+    GameObject gameOverManager;
+
     public int population { set; get; }
 
     public int addPopulation { set; get; }
@@ -25,8 +28,13 @@ public class Population : MonoBehaviour {
 	
     public void ChangePopulation()
     {
-        population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.3) * 100 * addPopulation);
+        population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.3) * 100 * (addPopulation * rate.Evaluate(pollutionStatus.SumPollution)));
         populationText.text = population.ToString();
         addPopulation = 0;
+
+        if (population <= 0)
+        {
+            gameOverManager.SetActive(true);
+        }
     }
 }

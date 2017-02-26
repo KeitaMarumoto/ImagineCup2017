@@ -14,6 +14,7 @@ public class DateController : MonoBehaviour {
     FactoryController factoryController;
 
     int date;
+    public int Date { get { return date; } }
 
 	// Use this for initialization
 	void Start () {

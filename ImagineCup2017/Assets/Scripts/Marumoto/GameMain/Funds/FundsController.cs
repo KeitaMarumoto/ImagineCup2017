@@ -5,7 +5,7 @@ public class FundsController : MonoBehaviour {
 	[SerializeField]
 	Text fundsText;
 
-	float fundsValue = 15000.0f;
+    float fundsValue = 15000.0f;
 	string strValue = "";
 
 	void Start()
@@ -33,7 +33,7 @@ public class FundsController : MonoBehaviour {
 	void ValueUpdate(float diff_)
 	{
 		fundsValue += diff_;
-		Debug.Log("変更後資金額：" + fundsValue);
+        
 	}
 
 	void ValueClamping()
