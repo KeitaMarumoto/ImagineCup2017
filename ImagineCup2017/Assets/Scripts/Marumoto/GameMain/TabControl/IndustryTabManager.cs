@@ -105,7 +105,7 @@ public class IndustryTabManager : MonoBehaviour {
 		RaycastHit hit3D;
 		Ray ray3D = Camera.main.ScreenPointToRay(beginMousePos);
 
-		Debug.DrawRay(ray3D.origin, ray3D.direction, new Color(1, 0, 0), 3, false);
+		//Debug.DrawRay(ray3D.origin, ray3D.direction, new Color(1, 0, 0), 3, false);
 
 		if (Physics.Raycast(ray3D, out hit3D))
 		{

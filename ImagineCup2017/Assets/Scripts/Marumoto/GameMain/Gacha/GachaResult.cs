@@ -29,7 +29,6 @@ public class GachaResult : MonoBehaviour {
 	void JsonPersing(string text_)
 	{
 		var json = Json.Deserialize(text_) as List<object>;
-		Debug.Log(json);
 		string jsonText = "";
 		Dictionary<string, object> jsonDict = new Dictionary<string, object>();
 		foreach(var dict in json)
@@ -41,7 +40,6 @@ public class GachaResult : MonoBehaviour {
 			resultDatas.Add(dict.Value.ToString());
 			jsonText += dict.Value.ToString() + "|";
 		}
-		Debug.Log(jsonText);
 		TextUpdate();
 	}
 

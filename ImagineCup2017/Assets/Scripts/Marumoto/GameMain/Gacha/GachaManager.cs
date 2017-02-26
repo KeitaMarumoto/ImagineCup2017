@@ -27,7 +27,7 @@ public class GachaManager : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.B))
 		{
-			fundscontroller.FundsValueChange(20000);
+			fundscontroller.FundsValueChange(100000);
 		}
 	}
 

@@ -77,7 +77,6 @@ public class ProductRegister : MonoBehaviour {
 						   + "Rank" + prod_.Value.Rank.ToString() + " | "
 						   + "Seconds : " + prod_.Value.SecondsToSell.ToString() + " | "
 						   + "Number : " + prod_.Value.NumberOfProducts.ToString();
-			Debug.Log(message);
 		}
 	}
 }
