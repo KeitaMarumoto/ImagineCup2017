@@ -23,18 +23,20 @@ public class Population : MonoBehaviour {
     void Start () {
         addPopulation = 0;
         population = 1000;
+        populationText.text = population.ToString();
         //StartCoroutine(ChangePopulation());
     }
 	
     public void ChangePopulation()
     {
-        population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.3) * 100 * (addPopulation * rate.Evaluate(pollutionStatus.SumPollution)));
-        populationText.text = population.ToString();
+        population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.8) * 1000 + (addPopulation * rate.Evaluate(pollutionStatus.SumPollution) * 10));
         addPopulation = 0;
-
         if (population <= 0)
         {
+            population = 0;
             gameOverManager.SetActive(true);
         }
+        populationText.text = population.ToString();
+
     }
 }
