@@ -9,6 +9,8 @@ public class FundsController : MonoBehaviour {
 
 	float fundsValue = 15000.0f;
 
+    public float FundsValue { get { return fundsValue; } }
+
     string strValue = "";
 
 	void Start()

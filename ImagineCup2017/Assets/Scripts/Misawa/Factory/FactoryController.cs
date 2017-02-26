@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FactoryController : MonoBehaviour {
-    
+
     [SerializeField]
     FactoryManager factoryManager;
 
@@ -27,7 +27,7 @@ public class FactoryController : MonoBehaviour {
     GameObject checkPopup;
 
     [SerializeField]
-    GameObject missPopup;
+    GameObject[] missPopups;
 
     int buildFactoryID;
 
@@ -92,14 +92,18 @@ public class FactoryController : MonoBehaviour {
     }
 
     public void OnCickPopOpen() {
-        if (mapGenerator.CheckCanBuildPos() == true)
+        if (fundsController.FundsValue < factoryManager.GetFactoryStatus(buildFactoryID, 0).rankUpcost)
         {
-            checkPopup.SetActive(true);
+            missPopups[1].SetActive(true);
+            return;
         }
-        else
+
+        if (mapGenerator.CheckCanBuildPos() == false)
         {
-            missPopup.SetActive(true);
+            missPopups[0].SetActive(true);
+            return;
         }
+        checkPopup.SetActive(true);
     }
 
     public void OnClickBuildButton()
@@ -114,16 +118,18 @@ public class FactoryController : MonoBehaviour {
             SoundManager.Instance.PlaySE("build");
             //buildFactoryID = -1;
         }
-        else
+        /*else
         {
-            missPopup.SetActive(true);
-        }
+            missPopups[0].SetActive(true);
+        }*/
     }
 
     public void ClosePopup()
     {
         checkPopup.SetActive(false);
-        missPopup.SetActive(false);
+        foreach (var missPop in missPopups) {
+            missPop.SetActive(false);
+        }
     }
 
     IEnumerator BuildNewFactory(int buildFactoryID)
@@ -149,6 +155,12 @@ public class FactoryController : MonoBehaviour {
 
     public void OnClickRankUpButton()
     {
+        if (fundsController.FundsValue < factoryManager.GetFactoryStatus(buildFactoryID, mapGenerator.GetThisFactoryRank()+1).rankUpcost)
+        {
+            missPopups[1].SetActive(true);
+            return;
+        }
+
         RankUpFactory();
         //StateManager.state = StateManager.State.RANKUP;
         //StartCoroutine(RankUpFactory());

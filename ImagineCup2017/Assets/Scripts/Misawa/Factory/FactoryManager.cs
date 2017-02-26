@@ -104,6 +104,7 @@ public class FactoryManager : MonoBehaviour {
     /// <returns></returns>
     public FactoryStatusData GetFactoryStatus(int factoryID,int rank)
     {
+        if (rank >= factoryData[factoryID].factoryStatus.Length) rank = factoryData[factoryID].factoryStatus.Length - 1;
         return factoryData[factoryID].factoryStatus[rank];
     }
 
