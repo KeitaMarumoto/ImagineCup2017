@@ -50,7 +50,6 @@ public class PollutionStatus : MonoBehaviour {
 		while (true)
 		{
 			yield return new WaitForSeconds(2.0f);
-			Debug.Log(SumPollution);
 			List<string> keys_ = new List<string>();
 			foreach(var key_ in Pollutions)
 			{
@@ -97,8 +96,6 @@ public class PollutionStatus : MonoBehaviour {
 
 	void UpdateGauge()
 	{
-        Debug.Log("SumPollution" + SumPollution);
-		Debug.Log("rect.height : " + gauge_.rect.height);
 		gauge_.localPosition = new Vector3(basePosition_.x,
 										   basePosition_.y + gauge_.rect.height * SumPollution,
 										   basePosition_.z);

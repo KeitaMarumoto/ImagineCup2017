@@ -21,6 +21,9 @@ public class FactoryController : MonoBehaviour {
     PollutionStatus pollutionStatus;
 
     [SerializeField]
+    Population population;
+
+    [SerializeField]
     GameObject checkPopup;
 
     [SerializeField]
@@ -31,7 +34,7 @@ public class FactoryController : MonoBehaviour {
     void Start()
     {
         buildFactoryID = -1;
-        StartCoroutine(PayMaintenance());
+        //StartCoroutine(PayMaintenance());
     }
 
     // Update is called once per frame
@@ -50,6 +53,8 @@ public class FactoryController : MonoBehaviour {
             else if (StateManager.state == StateManager.State.PRODUCTION)
             {
                 if (RayCast().tag == "IndustryTab") return;
+
+                population.addPopulation++;
 
                 //工場で商品を生産
                 Dictionary<string, int> productCount = factoryManager.Make();
@@ -189,19 +194,11 @@ public class FactoryController : MonoBehaviour {
 
 
     //工場の維持費を払う
-    IEnumerator PayMaintenance()
+    public void PayMaintenance()
     {
         int maintenanceCost = 0;
-        while (true)
-        {
-            if (StateManager.state == StateManager.State.PRODUCTION)
-            {
-                yield return new WaitForSeconds(1.0f);
-                maintenanceCost = factoryManager.PayMaintenance();
-                fundsController.FundsValueChange(-maintenanceCost);
-            }
-            else yield return null;
-        }
+        maintenanceCost = factoryManager.PayMaintenance();
+        fundsController.FundsValueChange(-maintenanceCost);
     }
 
     private GameObject RayCast()

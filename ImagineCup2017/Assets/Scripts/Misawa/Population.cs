@@ -15,28 +15,18 @@ public class Population : MonoBehaviour {
 
     public int population { set; get; }
 
+    public int addPopulation { set; get; }
     // Use this for initialization
     void Start () {
+        addPopulation = 0;
         population = 1000;
-        StartCoroutine(ChangePopulation());
+        //StartCoroutine(ChangePopulation());
     }
 	
-    IEnumerator ChangePopulation()
+    public void ChangePopulation()
     {
-        while (true)
-        {
-            if (StateManager.state == StateManager.State.PRODUCTION)
-            {
-
-                population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.5) * 100);
-                populationText.text = population.ToString();
-                yield return new WaitForSeconds(0.1f);
-            }
-            else yield return null;
-        }
+        population += (int)((rate.Evaluate(pollutionStatus.SumPollution) - 0.3) * 100 * addPopulation);
+        populationText.text = population.ToString();
+        addPopulation = 0;
     }
-    // Update is called once per frame
-    void Update () {
-        
-	}
 }

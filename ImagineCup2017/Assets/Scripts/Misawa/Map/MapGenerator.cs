@@ -187,7 +187,6 @@ public class MapGenerator : MonoBehaviour {
     public bool CreateBuilding(int factoryID)
     {
         //ChoicePosition();
-        Debug.Log(choicePos.x + ":" + choicePos.y);
         if (choicePos.x < 0 || choicePos.y < 0) return false;
         if (buildingData[choicePos.x, choicePos.y] != 0) return false;
 
@@ -229,7 +228,6 @@ public class MapGenerator : MonoBehaviour {
     public bool RankUpBuilding()
     {
         //ChoicePosition();
-        Debug.Log(buildingData[choicePos.x, choicePos.y]);
         if (choicePos.x < 0 || choicePos.y < 0) return false;
         if (buildingData[choicePos.x, choicePos.y] <= 0) return false;
         if ((buildingData[choicePos.x, choicePos.y] % maxRank) - 1 >= 2 || ((buildingData[choicePos.x, choicePos.y] % maxRank) - 1) < 0) return false;
@@ -268,7 +266,6 @@ public class MapGenerator : MonoBehaviour {
         int y = (int)choiceCube.transform.position.z;
         */
         //ChoicePosition();
-        Debug.Log("工場ランク = "+((buildingData[choicePos.x, choicePos.y] - 1) % maxRank));
         return ((buildingData[choicePos.x, choicePos.y] - 1) % maxRank);
     }
 
@@ -300,7 +297,6 @@ public class MapGenerator : MonoBehaviour {
         */
         //ChoicePosition();
         if (choicePos.x < 0 || choicePos.y < 0) return -1;
-        Debug.Log("工場ID = " + (buildingData[choicePos.x, choicePos.y] - 1) / maxRank);
 
         if (buildingData[choicePos.x, choicePos.y] == 0) return -1;
 
@@ -312,7 +308,6 @@ public class MapGenerator : MonoBehaviour {
         if (choicePos.x < 0 || choicePos.y < 0) return;
         if (buildingData[choicePos.x, choicePos.y] - 1 < 0)
         {
-            Debug.Log("NULL");
             uiController.clearRankupText(0);
             uiController.setRankupUIMaterial(null, 0);
             uiController.clearRankupText(1);
@@ -329,7 +324,6 @@ public class MapGenerator : MonoBehaviour {
         }
         else
         {
-            Debug.Log("NULL");
             uiController.clearRankupText(1);
             uiController.setRankupUIMaterial(null, 1);
         }

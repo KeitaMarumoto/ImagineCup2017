@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System.Collections;
+
 public class FundsController : MonoBehaviour {
 	[SerializeField]
 	Text fundsText;
 
-	float fundsValue = 1000.0f;
-	string strValue = "";
+	float fundsValue = 15000.0f;
+
+    string strValue = "";
 
 	void Start()
 	{
 		DividingValue();
-		TextUpdate();
+		StartCoroutine(TextUpdate());
 	}
 
 	/// <summary>
@@ -23,7 +26,7 @@ public class FundsController : MonoBehaviour {
 		ValueUpdate(diff_);
 		ValueClamping();
 		DividingValue();
-		TextUpdate();
+		//TextUpdate();
 	}
 
 	/// <summary>
@@ -33,7 +36,6 @@ public class FundsController : MonoBehaviour {
 	void ValueUpdate(float diff_)
 	{
 		fundsValue += diff_;
-		Debug.Log("変更後資金額：" + fundsValue);
 	}
 
 	void ValueClamping()
@@ -54,8 +56,12 @@ public class FundsController : MonoBehaviour {
 		strValue = strValue_;
 	}
 
-	void TextUpdate()
-	{
-		fundsText.text = strValue;
-	}
+    IEnumerator TextUpdate()
+    {
+        while (true)
+        {
+            fundsText.text = strValue;
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
 }
