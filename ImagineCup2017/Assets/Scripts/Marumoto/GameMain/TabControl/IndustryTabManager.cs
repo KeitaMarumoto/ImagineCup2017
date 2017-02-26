@@ -125,7 +125,6 @@ public class IndustryTabManager : MonoBehaviour {
 	/// <returns>満たせばtrue</returns>
 	bool IsDrag()
 	{
-		Debug.Log(endMousePos.y - beginMousePos.y);
 		if (endMousePos.y - beginMousePos.y >= 60.0f) return true;
 		return false;
 	}
@@ -141,7 +140,6 @@ public class IndustryTabManager : MonoBehaviour {
 		RaycastHit hit3D = Raycast();
 		if (hit3D.collider)
 		{
-			Debug.Log(hit3D.collider.tag);
 			if (hit3D.transform.tag == "IndustryTab")
 			{
 				hit3D.transform.SetAsLastSibling();

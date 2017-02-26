@@ -9,6 +9,9 @@ public class AutoSell : MonoBehaviour
     [SerializeField]
     ProductRegister productRegister;
 
+    [SerializeField]
+    Population popilation;
+
     // Use this for initialization
     void Start()
     {
@@ -47,10 +50,12 @@ public class AutoSell : MonoBehaviour
             {
                 if (productRegister.getProductDatas()[key].NumberOfProducts > 0)
                 {
-                    productRegister.NumberOfProductsValueChange(key, -1);
-                    fundsController.FundsValueChange(productRegister.getProductDatas()[key].UnitPrice);
+                    int sellNum = (int)(productRegister.getProductDatas()[key].SecondsToSell) * (1 + (popilation.population / 10000));
+                    Debug.Log("売れた数" + sellNum);
+                    productRegister.NumberOfProductsValueChange(key, -sellNum);
+                    fundsController.FundsValueChange(productRegister.getProductDatas()[key].UnitPrice * sellNum);
                 }
-                yield return new WaitForSeconds(productRegister.getProductDatas()[key].SecondsToSell);
+                yield return new WaitForSeconds(1f);
             }
             else yield return null;
         }

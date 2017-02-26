@@ -5,7 +5,7 @@ public class FundsController : MonoBehaviour {
 	[SerializeField]
 	Text fundsText;
 
-	float fundsValue = 1000.0f;
+	float fundsValue = 15000.0f;
 	string strValue = "";
 
 	void Start()

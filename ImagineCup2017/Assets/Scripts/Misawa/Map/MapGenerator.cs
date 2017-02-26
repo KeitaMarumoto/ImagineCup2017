@@ -184,10 +184,9 @@ public class MapGenerator : MonoBehaviour {
     /// </summary>
     /// <param name="factoryID">建てたい工場のID</param>
     /// <returns>建てるのに成功したか</returns>
-    public bool CreateBuilding(int factoryID)
+    public bool CreateBuilding(int factoryID,int productID)
     {
         //ChoicePosition();
-        Debug.Log(choicePos.x + ":" + choicePos.y);
         if (choicePos.x < 0 || choicePos.y < 0) return false;
         if (buildingData[choicePos.x, choicePos.y] != 0) return false;
 
@@ -199,7 +198,7 @@ public class MapGenerator : MonoBehaviour {
         quad.GetComponent<Renderer>().material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
 
         //Particleの生成
-        GameObject particle = Instantiate(itemParticles[0]) as GameObject;
+        GameObject particle = Instantiate(itemParticles[productID]) as GameObject;
         particle.transform.SetParent(quad.transform);
         particle.transform.localPosition = Vector3.zero;
         particle.transform.localRotation = Quaternion.Euler(-25, -180, 0);
@@ -226,16 +225,25 @@ public class MapGenerator : MonoBehaviour {
     /// 工場のランクを上げる
     /// </summary>
     /// <returns>ランクを上げることに成功したか</returns>
-    public bool RankUpBuilding()
+    public bool RankUpBuilding(int productID)
     {
         //ChoicePosition();
-        Debug.Log(buildingData[choicePos.x, choicePos.y]);
         if (choicePos.x < 0 || choicePos.y < 0) return false;
         if (buildingData[choicePos.x, choicePos.y] <= 0) return false;
         if ((buildingData[choicePos.x, choicePos.y] % maxRank) - 1 >= 2 || ((buildingData[choicePos.x, choicePos.y] % maxRank) - 1) < 0) return false;
 
         buildingData[choicePos.x, choicePos.y]++;
         buildingObjects[choicePos.x, choicePos.y].GetComponent<Renderer>().material = buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1];
+
+        //Particleの生成
+        Debug.Log("productID" + productID);
+        GameObject particle = Instantiate(itemParticles[productID]) as GameObject;
+        particle.transform.SetParent(buildingObjects[choicePos.x, choicePos.y].transform);
+        particle.transform.localPosition = Vector3.zero;
+        particle.transform.localRotation = Quaternion.Euler(-25, -180, 0);
+        ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+
+        particleObjects[choicePos.x, choicePos.y] = particleSystem;
 
         ChangeRankUPUIImage();
 
@@ -268,7 +276,6 @@ public class MapGenerator : MonoBehaviour {
         int y = (int)choiceCube.transform.position.z;
         */
         //ChoicePosition();
-        Debug.Log("工場ランク = "+((buildingData[choicePos.x, choicePos.y] - 1) % maxRank));
         return ((buildingData[choicePos.x, choicePos.y] - 1) % maxRank);
     }
 
@@ -300,7 +307,6 @@ public class MapGenerator : MonoBehaviour {
         */
         //ChoicePosition();
         if (choicePos.x < 0 || choicePos.y < 0) return -1;
-        Debug.Log("工場ID = " + (buildingData[choicePos.x, choicePos.y] - 1) / maxRank);
 
         if (buildingData[choicePos.x, choicePos.y] == 0) return -1;
 
@@ -312,7 +318,6 @@ public class MapGenerator : MonoBehaviour {
         if (choicePos.x < 0 || choicePos.y < 0) return;
         if (buildingData[choicePos.x, choicePos.y] - 1 < 0)
         {
-            Debug.Log("NULL");
             uiController.clearRankupText(0);
             uiController.setRankupUIMaterial(null, 0);
             uiController.clearRankupText(1);
@@ -322,14 +327,13 @@ public class MapGenerator : MonoBehaviour {
 
         uiController.setRankupText(GetThisFactoryID(), GetThisFactoryRank(),0);
         uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y] - 1], 0);
-        if (buildingData[choicePos.x, choicePos.y] < buildingMaterials.Length)
+        if (buildingData[choicePos.x, choicePos.y] < (GetThisFactoryID() *3) + /*buildingMaterials.Length*/3)
         {
             uiController.setRankupText(GetThisFactoryID(), GetThisFactoryRank()+1,1);
             uiController.setRankupUIMaterial(buildingMaterials[buildingData[choicePos.x, choicePos.y]], 1);
         }
         else
         {
-            Debug.Log("NULL");
             uiController.clearRankupText(1);
             uiController.setRankupUIMaterial(null, 1);
         }

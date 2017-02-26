@@ -52,6 +52,8 @@ public class ProductRegister : MonoBehaviour {
     public void NumberOfProductsValueChange(string key,int num)
     {
         products[key].NumberOfProducts += num;
+        if (products[key].NumberOfProducts < 0)
+            products[key].NumberOfProducts = 0;
     }
 
     public Dictionary<string,int> getNumberOfProducts()

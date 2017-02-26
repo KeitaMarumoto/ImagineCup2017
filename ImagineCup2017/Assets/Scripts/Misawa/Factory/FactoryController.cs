@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FactoryController : MonoBehaviour {
-    
+
     [SerializeField]
     FactoryManager factoryManager;
 
@@ -21,17 +21,20 @@ public class FactoryController : MonoBehaviour {
     PollutionStatus pollutionStatus;
 
     [SerializeField]
+    Population population;
+
+    [SerializeField]
     GameObject checkPopup;
 
     [SerializeField]
-    GameObject missPopup;
+    GameObject[] missPopups;
 
     int buildFactoryID;
 
     void Start()
     {
         buildFactoryID = -1;
-        StartCoroutine(PayMaintenance());
+        //StartCoroutine(PayMaintenance());
     }
 
     // Update is called once per frame
@@ -50,6 +53,8 @@ public class FactoryController : MonoBehaviour {
             else if (StateManager.state == StateManager.State.PRODUCTION)
             {
                 if (RayCast().tag == "IndustryTab") return;
+
+                population.addPopulation++;
 
                 //工場で商品を生産
                 Dictionary<string, int> productCount = factoryManager.Make();
@@ -87,20 +92,41 @@ public class FactoryController : MonoBehaviour {
     }
 
     public void OnCickPopOpen() {
-        if (mapGenerator.CheckCanBuildPos() == true)
+        if (fundsController.GetFunds() < factoryManager.GetFactoryStatus(buildFactoryID, 0).rankUpcost)
         {
-            checkPopup.SetActive(true);
+            missPopups[1].SetActive(true);
+            return;
         }
-        else
+
+        if (mapGenerator.CheckCanBuildPos() == false)
         {
-            missPopup.SetActive(true);
+            missPopups[0].SetActive(true);
+            return;
         }
+        checkPopup.SetActive(true);
     }
 
     public void OnClickBuildButton()
     {
         if (buildFactoryID < 0) return;
-        if (mapGenerator.CreateBuilding(buildFactoryID))
+
+        int productID = 0;
+        switch (factoryManager.GetFactoryStatus(buildFactoryID, 0).productName)
+        {
+            case "Toy":
+                productID = 0;
+                break;
+            case "Game":
+                productID = 1;
+                break;
+            case "Tool":
+                productID = 2;
+                break;
+            default:
+                productID = 0;
+                break;
+        }
+        if (mapGenerator.CreateBuilding(buildFactoryID, productID))
         {
             int cost = factoryManager.Construction(mapGenerator.GetThisFactoryID());
             fundsController.FundsValueChange(-cost);
@@ -109,18 +135,21 @@ public class FactoryController : MonoBehaviour {
             SoundManager.Instance.PlaySE("build");
             //buildFactoryID = -1;
         }
-        else
+        /*else
         {
-            missPopup.SetActive(true);
-        }
+            missPopups[0].SetActive(true);
+        }*/
     }
 
     public void ClosePopup()
     {
         checkPopup.SetActive(false);
-        missPopup.SetActive(false);
+        foreach (var missPop in missPopups) {
+            missPop.SetActive(false);
+        }
     }
 
+    /*
     IEnumerator BuildNewFactory(int buildFactoryID)
     {
         while (StateManager.state == StateManager.State.BUILD)
@@ -140,10 +169,16 @@ public class FactoryController : MonoBehaviour {
             }
             yield return null;
         }
-    }
+    }*/
 
     public void OnClickRankUpButton()
     {
+        if (fundsController.GetFunds() < factoryManager.GetFactoryStatus(buildFactoryID, mapGenerator.GetThisFactoryRank()+1).rankUpcost)
+        {
+            missPopups[1].SetActive(true);
+            return;
+        }
+
         RankUpFactory();
         //StateManager.state = StateManager.State.RANKUP;
         //StartCoroutine(RankUpFactory());
@@ -171,7 +206,23 @@ public class FactoryController : MonoBehaviour {
 
     void RankUpFactory()
     {
-        if (mapGenerator.RankUpBuilding())
+        int productID = 0;
+        switch (factoryManager.GetFactoryStatus(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank()+1).productName)
+        {
+            case "Toy":
+                productID = 0;
+                break;
+            case "Game":
+                productID = 1;
+                break;
+            case "Tool":
+                productID = 2;
+                break;
+            default:
+                productID = 0;
+                break;
+        }
+        if (mapGenerator.RankUpBuilding(productID))
         {
             int cost = factoryManager.RankUp(mapGenerator.GetThisFactoryID(), mapGenerator.GetThisFactoryRank());
             fundsController.FundsValueChange(-cost);
@@ -189,19 +240,11 @@ public class FactoryController : MonoBehaviour {
 
 
     //工場の維持費を払う
-    IEnumerator PayMaintenance()
+    public void PayMaintenance()
     {
         int maintenanceCost = 0;
-        while (true)
-        {
-            if (StateManager.state == StateManager.State.PRODUCTION)
-            {
-                yield return new WaitForSeconds(1.0f);
-                maintenanceCost = factoryManager.PayMaintenance();
-                fundsController.FundsValueChange(-maintenanceCost);
-            }
-            else yield return null;
-        }
+        maintenanceCost = factoryManager.PayMaintenance();
+        fundsController.FundsValueChange(-maintenanceCost);
     }
 
     private GameObject RayCast()

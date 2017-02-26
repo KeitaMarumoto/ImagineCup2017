@@ -104,6 +104,7 @@ public class FactoryManager : MonoBehaviour {
     /// <returns></returns>
     public FactoryStatusData GetFactoryStatus(int factoryID,int rank)
     {
+        if (rank >= factoryData[factoryID].factoryStatus.Length) rank = factoryData[factoryID].factoryStatus.Length - 1;
         return factoryData[factoryID].factoryStatus[rank];
     }
 
@@ -182,7 +183,7 @@ public class FactoryManager : MonoBehaviour {
         {
             for (int rank = 0; rank < factoriesCount.GetLength(1); rank++)
             {
-                num += (factoryData[factoryID].factoryStatus[rank].rankUpcost / 10) * factoriesCount[factoryID, rank];
+                num += (factoryData[factoryID].factoryStatus[rank].rankUpcost / 20) * factoriesCount[factoryID, rank];
             }
         }
         return num;
