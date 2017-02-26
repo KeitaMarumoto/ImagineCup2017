@@ -22,6 +22,9 @@ public class EventScene : MonoBehaviour {
 	Image eventStill;
 
 	[SerializeField]
+	Text captionText;
+
+	[SerializeField]
 	Image fade;
 
 	[SerializeField]
@@ -120,6 +123,7 @@ public class EventScene : MonoBehaviour {
 		{
 			eventStillObj.SetActive(true);
 			eventStill.sprite = PollutionEventManager.Instance.GetEventStills();
+			captionText.text = PollutionEventManager.Instance.GetNewsText();
 		}
 		else
 		{
