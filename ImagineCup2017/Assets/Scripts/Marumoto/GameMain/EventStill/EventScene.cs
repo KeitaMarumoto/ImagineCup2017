@@ -37,10 +37,13 @@ public class EventScene : MonoBehaviour {
 
 	IEnumerator EventStream()
 	{
+		StateManager.state = StateManager.State.EVENT;
 		yield return StartCoroutine(FadeInOut("eventBGM", FadeState.BEGIN));
 		fade.raycastTarget = false;
 		yield return StartCoroutine(InputWait());
 		yield return StartCoroutine(FadeInOut("mainBGM", FadeState.END));
+		StateManager.state = StateManager.State.EVENT;
+		Destroy(gameObject);
 	}
 
 	IEnumerator FadeInOut(string bgmName_, FadeState state_)
