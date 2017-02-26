@@ -42,7 +42,7 @@ public class EventScene : MonoBehaviour {
 		fade.raycastTarget = false;
 		yield return StartCoroutine(InputWait());
 		yield return StartCoroutine(FadeInOut("mainBGM", FadeState.END));
-		StateManager.state = StateManager.State.EVENT;
+		StateManager.state = StateManager.State.PRODUCTION;
 		Destroy(gameObject);
 	}
 
