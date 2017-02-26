@@ -7,6 +7,7 @@ public class GachaButtonYes : MonoBehaviour {
 
 	public void CreatePopup()
 	{
-		Instantiate(gachaPopup, GachaManager.Instance.getParent(), false);
+		GameObject refObj = (GameObject)Instantiate(gachaPopup, GachaManager.Instance.getParent(), false);
+		GachaManager.Instance.AddPopup(refObj);
 	}
 }

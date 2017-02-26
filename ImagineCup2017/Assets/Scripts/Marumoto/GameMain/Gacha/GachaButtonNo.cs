@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GachaButtonNo : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void ClosingPopup(int index_)
+	{
+		GachaManager.Instance.RemovePopup(index_);
+		Destroy(gameObject);
 	}
 }
