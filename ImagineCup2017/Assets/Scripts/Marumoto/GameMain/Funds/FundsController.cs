@@ -58,4 +58,9 @@ public class FundsController : MonoBehaviour {
 	{
 		fundsText.text = strValue;
 	}
+
+	public int GetFunds()
+	{
+		return (int)fundsValue;
+	}
 }

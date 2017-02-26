@@ -8,11 +8,27 @@ public class GachaManager : MonoBehaviour {
 		get { return instance; }
 	}
 
+	[SerializeField]
+	FactoryManager factoryManager;
+	[SerializeField]
+	FundsController fundscontroller;
+
 	List<GameObject> popupes = new List<GameObject>();
 
 	void Awake()
 	{
 		if (instance == null) instance = this;
+	}
+
+	/// <summary>
+	/// デバッグ用
+	/// </summary>
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.B))
+		{
+			fundscontroller.FundsValueChange(20000);
+		}
 	}
 
 	public Transform getParent()
@@ -37,5 +53,25 @@ public class GachaManager : MonoBehaviour {
 			Destroy(popup_);
 		}
 		popupes.Clear();
+	}
+
+	public bool CanBuild(int index_)
+	{
+		return factoryManager.CanBuild(index_);
+	}
+
+	public void UnlockFactory(int index_)
+	{
+		factoryManager.Unrock(index_);
+	}
+
+	public void FundsValueChange(int value_)
+	{
+		fundscontroller.FundsValueChange(value_);
+	}
+
+	public int GetFunds()
+	{
+		return fundscontroller.GetFunds();
 	}
 }

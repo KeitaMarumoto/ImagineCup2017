@@ -10,4 +10,10 @@ public class GachaButtonYes : MonoBehaviour {
 		GameObject refObj = (GameObject)Instantiate(gachaPopup, GachaManager.Instance.getParent(), false);
 		GachaManager.Instance.AddPopup(refObj);
 	}
+
+	public void PayFundsGacha()
+	{
+		SoundManager.Instance.PlaySE("cash");
+		GachaManager.Instance.FundsValueChange(-100000);
+	}
 }

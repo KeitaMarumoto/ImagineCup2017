@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections.Generic;
 using MiniJSON;
 
@@ -14,6 +15,10 @@ enum DATABASE_ELEMENTS
 public class GachaResult : MonoBehaviour {
 	[SerializeField]
 	Text text_;
+	[SerializeField]
+	GameObject supplyPanel_;
+	[SerializeField]
+	Text supplyValue;
 
 	List<string> resultDatas = new List<string>();
 	
@@ -53,10 +58,28 @@ public class GachaResult : MonoBehaviour {
 		{
 			message_ = MissText();
 		}
+		else
+		{
+			if (!GachaManager.Instance.CanBuild((int)DATABASE_ELEMENTS.INDEX))
+			{
+				message_ = SuccessText();
+				GachaManager.Instance.UnlockFactory((int)DATABASE_ELEMENTS.INDEX);
+			}
+			else
+			{
+				message_ = DoubleText();
+				ActivateSupplyPanel();
+				GachaManager.Instance.FundsValueChange(Convert.ToInt32(resultDatas[(int)DATABASE_ELEMENTS.SUPPLY]));
+			}
+		}
 
 		text_.text = message_;
 	}
 
+	/// <summary>
+	/// はずれを引いた時のメッセージ
+	/// </summary>
+	/// <returns>メッセージ</returns>
 	string MissText()
 	{
 		string str_ = "残念！" + "\n"
@@ -64,5 +87,37 @@ public class GachaResult : MonoBehaviour {
 					+ "技術の進歩に失敗は" + "\n" 
 					+ "付き物だ。";
 		return str_;
+	}
+
+	/// <summary>
+	/// まだアンロックしてないものを引いたとき。
+	/// </summary>
+	/// <returns>メッセージ</returns>
+	string SuccessText()
+	{
+		string str_ = "成功だ！" + "\n"
+					+ "おめでとう！" + "\n" + "\n"
+					+ "工場" + resultDatas[(int)DATABASE_ELEMENTS.NAME] + "が" + "\n" 
+					+ "使用可能になったぞ！";
+		return str_;
+	}
+
+	string DoubleText()
+	{
+		string str_ = "ふむ…。" + "\n"
+					+ "あまり良い成果は" + "\n" 
+					+ "得られなかった。" + "\n"
+					+ "\n"
+					+ "工場" + resultDatas[(int)DATABASE_ELEMENTS.NAME] + "は" + "\n"
+					+ "既に使用可能だ。" + "\n"
+					+ "代わりに支援金を送る";
+		return str_;
+	}
+
+	void ActivateSupplyPanel()
+	{
+		supplyPanel_.SetActive(true);
+		int supplyInt_ = Convert.ToInt32(resultDatas[(int)DATABASE_ELEMENTS.SUPPLY]);
+		supplyValue.text = string.Format("{0:#,0}", supplyInt_);
 	}
 }
