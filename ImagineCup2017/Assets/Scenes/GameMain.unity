@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8021f52ee898fd944bdd41c869362ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gachaPopup: {fileID: 52035616, guid: 4d9334e48e3b22a49ad376cb91c52c72, type: 2}
+  gachaPopup: {fileID: 1000011767623964, guid: 4d9334e48e3b22a49ad376cb91c52c72, type: 2}
 --- !u!1 &449052584
 GameObject:
   m_ObjectHideFlags: 0
