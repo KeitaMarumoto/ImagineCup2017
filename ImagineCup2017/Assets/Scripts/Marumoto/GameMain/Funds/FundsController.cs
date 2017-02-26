@@ -5,9 +5,6 @@ public class FundsController : MonoBehaviour {
 	[SerializeField]
 	Text fundsText;
 
-    [SerializeField]
-    GameObject gameOverManager;
-
     float fundsValue = 15000.0f;
 	string strValue = "";
 
@@ -36,10 +33,7 @@ public class FundsController : MonoBehaviour {
 	void ValueUpdate(float diff_)
 	{
 		fundsValue += diff_;
-        if(fundsValue <= 0)
-        {
-            gameOverManager.SetActive(true);
-        }
+        
 	}
 
 	void ValueClamping()
