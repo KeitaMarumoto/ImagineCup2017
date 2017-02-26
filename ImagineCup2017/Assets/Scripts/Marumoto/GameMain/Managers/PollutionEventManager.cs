@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 世界の状態を表す。
@@ -27,6 +28,12 @@ public class PollutionEventManager : MonoBehaviour {
 	PollutionStatus pollutionStatus;
     [SerializeField]
     PollutionMap pollutionMap;
+	[SerializeField]
+	List<Sprite> eventStills;
+	[SerializeField]
+	GameObject eventPrefab;
+	[SerializeField]
+	Transform eventStillParent;
 
 	WorldStatus worldStatus;
 	WorldStatus oldWorldStatus;
@@ -55,13 +62,17 @@ public class PollutionEventManager : MonoBehaviour {
 
 			if (worldStatus != oldWorldStatus)
 			{
+				EventStart();
 				oldWorldStatus = worldStatus;
-
-				backgroundSky.ChangeBackground(worldStatus);
-                pollutionMap.ChangeTexture(worldStatus);
             }
 			yield return new WaitForSeconds(0.3f);
 		}
+	}
+
+	public void UpdateWorldImpl()
+	{
+		backgroundSky.ChangeBackground(worldStatus);
+		pollutionMap.ChangeTexture(worldStatus);
 	}
 
 	/// <summary>
@@ -109,5 +120,25 @@ public class PollutionEventManager : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public Sprite GetEventStills()
+	{
+		if (worldStatus == WorldStatus.CLEAR) return null;
+		Sprite sprite_;
+		sprite_ = eventStills[(int)worldStatus - 1];
+		return sprite_;
+	}
+
+	void EventStart()
+	{
+		if ((oldWorldStatus == WorldStatus.CLEAR) && (worldStatus == WorldStatus.STAGNANT))
+		{
+			Instantiate(eventPrefab, eventStillParent, false);
+		}
+		else if ((oldWorldStatus == WorldStatus.STAGNANT) && (worldStatus == WorldStatus.DIRTY))
+		{
+			Instantiate(eventPrefab, eventStillParent, false);
+		}
 	}
 }
