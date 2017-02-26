@@ -92,7 +92,7 @@ public class FactoryController : MonoBehaviour {
     }
 
     public void OnCickPopOpen() {
-        if (fundsController.FundsValue < factoryManager.GetFactoryStatus(buildFactoryID, 0).rankUpcost)
+        if (fundsController.GetFunds() < factoryManager.GetFactoryStatus(buildFactoryID, 0).rankUpcost)
         {
             missPopups[1].SetActive(true);
             return;
@@ -173,7 +173,7 @@ public class FactoryController : MonoBehaviour {
 
     public void OnClickRankUpButton()
     {
-        if (fundsController.FundsValue < factoryManager.GetFactoryStatus(buildFactoryID, mapGenerator.GetThisFactoryRank()+1).rankUpcost)
+        if (fundsController.GetFunds() < factoryManager.GetFactoryStatus(buildFactoryID, mapGenerator.GetThisFactoryRank()+1).rankUpcost)
         {
             missPopups[1].SetActive(true);
             return;
