@@ -46,6 +46,14 @@ public class FactoryManager : MonoBehaviour {
     //テスト用
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Unrock(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Unrock(1);
+        }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Unrock(2);
